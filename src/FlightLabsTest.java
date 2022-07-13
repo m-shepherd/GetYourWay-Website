@@ -47,7 +47,7 @@ public class FlightLabsTest {
                     JsonNode arrayElement = arrayNode.get(i);
                     JsonNode flightDate = arrayElement.get("flight_date");
                     JsonNode departureAirport = arrayElement.at("/departure/airport");
-                    JsonNode depatureScheduled = arrayElement.at("/departure/scheduled");
+                    JsonNode departureScheduled = arrayElement.at("/departure/scheduled");
                     JsonNode arrivalAirport = arrayElement.at("/arrival/airport");
                     JsonNode arrivalScheduled = arrayElement.at("/arrival/scheduled");
                     JsonNode airlineName = arrayElement.at("/airline/name");
@@ -55,7 +55,7 @@ public class FlightLabsTest {
 
                     System.out.println("Date: " + flightDate.toString() + ", " +
                             "Departure Airport: " + departureAirport.toString() + ", " +
-                            "Departure Time: " + depatureScheduled.toString().substring(12, 17) + ", " +
+                            "Departure Time: " + departureScheduled.toString().substring(12, 17) + ", " +
                             "Arrival Airport: " + arrivalAirport.toString() + ", " +
                             "Arrival Time: " + arrivalScheduled.toString().substring(12, 17) + ", " +
                             "Airline Name: " + airlineName.toString() + ", " +
@@ -67,29 +67,6 @@ public class FlightLabsTest {
 
     } catch (Exception e) {
         e.printStackTrace();
-        }
-    }
-
-    public static void traverse(JsonNode root){
-
-        if(root.isObject()){
-            Iterator<String> fieldNames = root.fieldNames();
-
-            while(fieldNames.hasNext()) {
-                String fieldName = fieldNames.next();
-                JsonNode fieldValue = root.get(fieldName);
-                traverse(fieldValue);
-            }
-        } else if(root.isArray()){
-            ArrayNode arrayNode = (ArrayNode) root;
-            for(int i = 0; i < arrayNode.size(); i++) {
-                JsonNode arrayElement = arrayNode.get(i);
-                traverse(arrayElement);
-            }
-        } else {
-            // JsonNode root represents a single value field - do something with it.
-            System.out.println(root);
-
         }
     }
 
