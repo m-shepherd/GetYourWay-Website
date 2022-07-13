@@ -39,7 +39,6 @@ public class FlightLabsTest {
 
                 ObjectMapper mapper = new ObjectMapper();
                 JsonNode flightJson = mapper.readTree(inline);
-//                System.out.println(flightJson.toPrettyString());
 
                 ArrayNode arrayNode = (ArrayNode) flightJson;
                 for(int i = 0; i < arrayNode.size(); i++) {
