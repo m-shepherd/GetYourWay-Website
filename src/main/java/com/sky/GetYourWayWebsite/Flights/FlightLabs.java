@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class FlightLabs {
                 ArrayNode arrayNode = (ArrayNode) flightJson;
                 for(int i = 0; i < arrayNode.size(); i++) {
                     JsonNode arrayElement = arrayNode.get(i);
-                    Date flightDate = sdf.parse(arrayElement.get("flight_date").toString().substring(1, arrayElement.get("flight_date").toString().length()-1));
+                    LocalDate flightDate = LocalDate.parse(arrayElement.get("flight_date").toString().substring(1, arrayElement.get("flight_date").toString().length()-1));
                     String departureAirport = arrayElement.at("/departure/airport").toString();
                     LocalTime departureScheduled = LocalTime.parse(arrayElement.at("/departure/scheduled").toString().substring(12, 17), DateTimeFormatter.ofPattern("HH:mm"));
                     String arrivalAirport = arrayElement.at("/arrival/airport").toString();

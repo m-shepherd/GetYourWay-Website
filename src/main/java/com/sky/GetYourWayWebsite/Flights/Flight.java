@@ -2,11 +2,12 @@ package com.sky.GetYourWayWebsite.Flights;
 
 import org.springframework.cglib.core.Local;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 
 public class Flight {
-    private final Date date;
+    private final LocalDate date;
     private final String departureAirport;
     private final LocalTime departureTime;
     private final String arrivalAirport;
@@ -14,7 +15,7 @@ public class Flight {
     private final String airlineName;
     private final String flightNumber;
 
-    public Flight(Date date, String departureAirport, LocalTime departureTime, String arrivalAirport, LocalTime arrivalTime,
+    public Flight(LocalDate date, String departureAirport, LocalTime departureTime, String arrivalAirport, LocalTime arrivalTime,
                   String airlineName, String airlineNumber) {
         this.date = date;
         this.departureAirport = departureAirport;
@@ -32,13 +33,13 @@ public class Flight {
                 "Departure Airport -> " + departureAirport + "\n" +
                 "Departure Time -> " + departureTime.toString() + "\n" +
                 "Arrival Airport -> " + arrivalAirport + "\n" +
-                "Arrival Time -> " + arrivalTime + "\n" +
+                "Arrival Time -> " + arrivalTime.toString() + "\n" +
                 "Airline Name -> " + airlineName+ "\n" +
                 "Flight Number -> " + flightNumber;
 
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
