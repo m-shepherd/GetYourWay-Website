@@ -8,20 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.List;
 
 @SpringBootApplication
-public class GetYourWayWebsiteApplication implements CommandLineRunner {
-	@Autowired
-	UserRepository userRepository;
-
+public class GetYourWayWebsiteApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GetYourWayWebsiteApplication.class, args);
-	}
-
-	@Override
-	public void run(String... args) throws Exception {
-		List<User> users = userRepository.getAllUsers();
-
-		for (User user : users) {
-			System.out.println(user.getFirstName() + " " + user.getLastName());
-		}
 	}
 }
