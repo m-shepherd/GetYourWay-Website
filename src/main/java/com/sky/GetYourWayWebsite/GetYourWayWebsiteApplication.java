@@ -1,5 +1,7 @@
 package com.sky.GetYourWayWebsite;
 
+import com.sky.GetYourWayWebsite.Flights.Flight;
+import com.sky.GetYourWayWebsite.Flights.FlightLabs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,10 +20,14 @@ public class GetYourWayWebsiteApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		List<User> users = userRepository.getAllUsers();
+		FlightLabs flightDetails = new FlightLabs();
 
-		for (User user : users) {
-			System.out.println(user.getFirstName() + " " + user.getLastName());
+		List<Flight> availableFlights = flightDetails.getFlights();
+
+		for (Flight flight : availableFlights) {
+			System.out.println(flight);
+			System.out.println();
 		}
+
 	}
 }
