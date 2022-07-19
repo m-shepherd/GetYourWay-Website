@@ -22,7 +22,8 @@ public class GetYourWayWebsiteApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		FlightLabs flightDetails = new FlightLabs();
 
-		List<Flight> availableFlights = flightDetails.getFlights();
+		List<Flight> availableFlights = flightDetails.getFlights("2022-07-13", "LHR",
+				"FRA");
 
 		for (Flight flight : availableFlights) {
 			System.out.println(flight);

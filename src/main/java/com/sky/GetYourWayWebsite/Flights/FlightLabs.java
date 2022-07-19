@@ -21,9 +21,10 @@ public class FlightLabs {
     private final String API_KEY = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMGQ1M2VkODYyYzBmNzliYmEyZTFmMmI3ZTBmYTY2ZmEwZjMzNmYyODY4ZmUxYmFiMjJiZmFlNTAyM2Y2ZDdiYmVlNzhmOTIyZjc4MTZkMDQiLCJpYXQiOjE2NTgxNTU4OTYsIm5iZiI6MTY1ODE1NTg5NiwiZXhwIjoxNjg5NjkxODk2LCJzdWIiOiI4NzI0Iiwic2NvcGVzIjpbXX0.mmyCyRS-ia216FPFhkzWmKTtgA_ES2Ot5ZocmwWKWKNnS6KumPp6qKZwA6B0zbdlKoEUTBerinhpT08xNl9iqQ";
 
     @GetMapping("/currentFlights")
-    public List<Flight> getFlights() {
-        String searchParameters = "&dep_iata=LHR&arr_iata=FRA&flight_status=scheduled&arr_scheduled_time_arr=2022-07-13";
-        String uri = API_ADDRESS + "access_key=" + API_KEY + searchParameters;
+    public List<Flight> getFlights(String date, String departureAirport, String arrivalAirport) {
+        FlightQuery query = new FlightQuery(date, departureAirport, arrivalAirport);
+//        String searchParameters = "&dep_iata=LHR&arr_iata=FRA&flight_status=scheduled&arr_scheduled_time_arr=2022-07-13";
+        String uri = API_ADDRESS + "access_key=" + API_KEY + query.getSearchParameters();
 
         RestTemplate restTemplate = new RestTemplate();
 
