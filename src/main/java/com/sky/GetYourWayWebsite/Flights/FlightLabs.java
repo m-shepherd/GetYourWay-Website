@@ -23,7 +23,6 @@ public class FlightLabs {
     @GetMapping("/currentFlights")
     public List<Flight> getFlights(String date, String departureAirport, String arrivalAirport) {
         FlightQuery query = new FlightQuery(date, departureAirport, arrivalAirport);
-//        String searchParameters = "&dep_iata=LHR&arr_iata=FRA&flight_status=scheduled&arr_scheduled_time_arr=2022-07-13";
         String uri = API_ADDRESS + "access_key=" + API_KEY + query.getSearchParameters();
 
         RestTemplate restTemplate = new RestTemplate();
