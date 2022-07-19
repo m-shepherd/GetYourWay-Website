@@ -1,6 +1,7 @@
 package com.sky.GetYourWayWebsite.apis;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -10,8 +11,8 @@ public class WeatherAPIController {
     private final String WEATHER_API_KEY = "b4057c94ecd30c1ccb944addfb79d2bc";
 
     @GetMapping("/currentWeather")
-    public Object getCurrentWeather() {
-        String uri = WEATHER_API_ADDRESS + "lat=51.5085&lon=-0.1257&exclude=minutely,hourly,daily,alerts"+
+    public Object getCurrentWeather(@RequestParam String lat, @RequestParam String lon) {
+        String uri = WEATHER_API_ADDRESS + "lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,daily,alerts" +
                 "&units=metric&appid=" + WEATHER_API_KEY;
 
         RestTemplate restTemplate = new RestTemplate();
