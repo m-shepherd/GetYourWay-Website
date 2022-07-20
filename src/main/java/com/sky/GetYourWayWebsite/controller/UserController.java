@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
     @Autowired
     UserService userService;
@@ -25,8 +26,7 @@ public class UserController {
         Optional<User> possibleUser = userService.findByUsername(username);
         return possibleUser.isPresent();
     }
-
-    @CrossOrigin
+    
     @PostMapping("/users")
     public HttpStatus createUser(@RequestBody User newUser) {
         if (!isUserPresent(newUser.getUsername())) {
@@ -36,7 +36,6 @@ public class UserController {
         }
     }
 
-    @CrossOrigin
     @PutMapping("/users")
     public HttpStatus updateUser(@RequestBody User newUser) {
         if (isUserPresent(newUser.getUsername())) {
@@ -60,7 +59,6 @@ public class UserController {
         }
     }
 
-    @CrossOrigin
     @PostMapping("/users/{username}/{password}")
     public HttpStatus login(@PathVariable String username, @PathVariable String password) {
         Optional<User> possibleUser = userService.findByUsername(username);
