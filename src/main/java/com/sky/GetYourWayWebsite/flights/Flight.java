@@ -1,10 +1,7 @@
-package com.sky.GetYourWayWebsite.Flights;
-
-import org.springframework.cglib.core.Local;
+package com.sky.GetYourWayWebsite.flights;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 public class Flight {
     private final LocalDate date;

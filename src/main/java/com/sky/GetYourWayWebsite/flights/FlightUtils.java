@@ -1,4 +1,4 @@
-package com.sky.GetYourWayWebsite.Flights;
+package com.sky.GetYourWayWebsite.flights;
 
 import java.io.PrintWriter;
 import java.nio.file.Files;

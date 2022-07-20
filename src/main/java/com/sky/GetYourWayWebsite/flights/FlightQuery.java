@@ -1,4 +1,4 @@
-package com.sky.GetYourWayWebsite.Flights;
+package com.sky.GetYourWayWebsite.flights;
 
 
 public class FlightQuery {
@@ -13,8 +13,8 @@ public class FlightQuery {
     }
 
     public String getSearchParameters() {
-        return "&dep_iata=" + departureAirport +"&arr_iata=" + arrivalAirport +
-                "&flight_status=scheduled&arr_scheduled_time_arr=" + date;
+        return "&arr_scheduled_time_arr=" + date + "&dep_iata=" + departureAirport +"&arr_iata=" + arrivalAirport +
+                "&flight_status=scheduled";
     }
 
 }
