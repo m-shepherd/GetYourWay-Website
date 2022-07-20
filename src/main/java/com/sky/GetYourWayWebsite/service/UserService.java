@@ -23,7 +23,13 @@ public class UserService {
     }
 
     public User addUser(User user) {
-        return userRepository.save(user);
+        if (!user.getUsername().equals("") && !user.getFirstName().equals("") &&
+                !user.getLastName().equals("") &&
+                !user.getEmail().equals("") && !user.getPassword() .equals("")) {
+            return userRepository.save(user);
+        } else {
+            return null;
+        }
     }
 
 }

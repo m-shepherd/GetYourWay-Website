@@ -6,19 +6,19 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <h1>Login Page</h1>
+    <h1>Sign Up Page</h1>
     <div class="container">
-        <form id="signup">
-            <label for="fname">First name:</label><br>
-            <input type="text" id="fname" name="fname"><br>
-            <label for="lname">Last name:</label><br>
-            <input type="text" id="lname" name="lname"><br>
+        <form id="signup" method="post" action="localhost:8080/users">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="firstName">First name:</label><br>
+            <input type="text" id="firstName" name="firstName"><br>
+            <label for="lastName">Last name:</label><br>
+            <input type="text" id="lastName" name="lastName"><br>
             <label for="email">Email:</label><br>
             <input type="text" id="email" name="email"><br>
-            <label for="uname">Username:</label><br>
-            <input type="text" id="uname" name="uname"><br>
-            <label for="pword">Password:</label><br>
-            <input type="text" id="pword" name="pword"><br><br>
+            <label for="password">Password:</label><br>
+            <input type="text" id="password" name="password"><br><br>
             <button type="submit">Submit</button>
           </form>
     </div>

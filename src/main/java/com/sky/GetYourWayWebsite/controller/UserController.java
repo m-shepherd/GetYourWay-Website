@@ -27,15 +27,21 @@ public class UserController {
         if (possibleUser.isPresent()) {
             return possibleUser.get();
         } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Request Type");
         }
     }
 
+    @CrossOrigin
     @PostMapping("/users")
     public HttpStatus createUser(@RequestBody User user) {
-        User result = userService.addUser(user);
+        User result = null;
+        try {
+            result = userService.addUser(user);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid User Information Provided");
+        }
         if (result == null) {
-            return HttpStatus.NOT_ACCEPTABLE;
+            return HttpStatus.BAD_REQUEST;
         } else {
             return HttpStatus.CREATED;
         }
