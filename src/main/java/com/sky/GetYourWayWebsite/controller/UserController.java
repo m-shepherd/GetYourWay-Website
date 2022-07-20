@@ -47,5 +47,25 @@ public class UserController {
         }
     }
 
+    @CrossOrigin
+    @PostMapping("/users/{username}/{password}")
+    public HttpStatus login(@PathVariable String username, @PathVariable String password) {
+        Optional<User> possibleUser = userService.findByUsername(username);
+        User user = null;
+        if (possibleUser.isPresent()) {
+            user = possibleUser.get();
+        }
+        if (user != null) {
+            if (user.getPassword().equals(password)) {
+                return HttpStatus.OK;
+            } else {
+                return HttpStatus.UNAUTHORIZED;
+            }
+        } else {
+            return HttpStatus.UNAUTHORIZED;
+        }
+
+    }
+
 
 }
