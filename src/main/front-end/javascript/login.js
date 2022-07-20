@@ -8,8 +8,6 @@ function handleSubmit(event) {
     const json = JSON.stringify(object);
     const jsonData = JSON.parse(json);
 
-    console.log("http://localhost:8080/users/" + jsonData.username + "/" + jsonData.password)
-
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "http://localhost:8080/users/" + jsonData.username + "/" + jsonData.password, true);
     xhr.setRequestHeader("Content-Type", "application/json");

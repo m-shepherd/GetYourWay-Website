@@ -10,15 +10,15 @@
 <div class="container">
     <form id="signup" method="post" action="localhost:8080/users">
         <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username"><br>
+        <input type="text" id="username" name="username" required><br>
         <label for="firstName">First name:</label><br>
-        <input type="text" id="firstName" name="firstName"><br>
+        <input type="text" id="firstName" name="firstName" required pattern="[a-zA-Z]+"><br>
         <label for="lastName">Last name:</label><br>
-        <input type="text" id="lastName" name="lastName"><br>
+        <input type="text" id="lastName" name="lastName" required pattern="[a-zA-Z]+"><br>
         <label for="email">Email:</label><br>
-        <input type="text" id="email" name="email"><br>
+        <input type="text" id="email" name="email" required><br>
         <label for="password">Password:</label><br>
-        <input type="text" id="password" name="password"><br><br>
+        <input type="text" id="password" name="password" required><br><br>
         <button type="submit">Submit</button>
     </form>
 </div>

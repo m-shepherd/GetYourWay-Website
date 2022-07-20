@@ -10,16 +10,11 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
     @Autowired
     UserRepository userRepository;
 
     public List<User> getAllUsers(){
         return userRepository.findAll();
-    }
-
-    public Optional<User> getUserById(int id) {
-        return userRepository.findById(id);
     }
 
     public User addUser(User user) {
@@ -33,7 +28,7 @@ public class UserService {
     }
 
     public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findUserByUsername(username);
     }
 
 

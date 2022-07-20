@@ -7,9 +7,17 @@ function handleSubmit(event) {
     data.forEach((value, key) => object[key] = value);
     var json = JSON.stringify(object);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:8080/users");
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost:8080/users", true);
     xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4)  {
+            var serverResponse = xhr.responseText;
+            if (serverResponse === '"CREATED"') {
+                window.location.replace("index.html")
+            }
+        }
+    };
     xhr.send(json);
 
 }

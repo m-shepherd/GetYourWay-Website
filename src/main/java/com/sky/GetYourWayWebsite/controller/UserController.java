@@ -21,22 +21,35 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/users/{id}")
-    public User getOneUser(@PathVariable int id) {
-        Optional<User> possibleUser = userService.getUserById(id);
-        if (possibleUser.isPresent()) {
-            return possibleUser.get();
-        } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Request Type");
-        }
+    private boolean isUserPresent(String username) {
+        Optional<User> possibleUser = userService.findByUsername(username);
+        return possibleUser.isPresent();
     }
 
     @CrossOrigin
     @PostMapping("/users")
-    public HttpStatus createUser(@RequestBody User user) {
-        User result = null;
+    public HttpStatus createUser(@RequestBody User newUser) {
+        if (!isUserPresent(newUser.getUsername())) {
+            return editUserDetails(newUser);
+        } else {
+            return HttpStatus.BAD_REQUEST;
+        }
+    }
+
+    @CrossOrigin
+    @PutMapping("/users")
+    public HttpStatus updateUser(@RequestBody User newUser) {
+        if (isUserPresent(newUser.getUsername())) {
+            return editUserDetails(newUser);
+        } else {
+            return HttpStatus.BAD_REQUEST;
+        }
+    }
+
+    private HttpStatus editUserDetails(@RequestBody User newUser) {
+        User result;
         try {
-            result = userService.addUser(user);
+            result = userService.addUser(newUser);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid User Information Provided");
         }
