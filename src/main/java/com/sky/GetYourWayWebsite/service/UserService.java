@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
     @Autowired
     UserRepository userRepository;
 
@@ -18,12 +17,19 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> getUserById(int id) {
-        return userRepository.findById(id);
+    public User addUser(User user) {
+        if (!user.getUsername().equals("") && !user.getFirstName().equals("") &&
+                !user.getLastName().equals("") &&
+                !user.getEmail().equals("") && !user.getPassword() .equals("")) {
+            return userRepository.save(user);
+        } else {
+            return null;
+        }
     }
 
-    public User addUser(User user) {
-        return userRepository.save(user);
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findUserByUsername(username);
     }
+
 
 }
