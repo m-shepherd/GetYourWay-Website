@@ -1,12 +1,17 @@
-package com.sky.GetYourWayWebsite.flights;
+package com.sky.GetYourWayWebsite.controller;
 
+import com.sky.GetYourWayWebsite.flights.Flight;
+import com.sky.GetYourWayWebsite.flights.FlightQuery;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,19 +21,23 @@ import java.util.List;
 
 
 @RestController
-public class FlightLabsController {
+public class FlightController {
     private final String API_ADDRESS = "https://app.goflightlabs.com/flights";
     private final String API_KEY = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMGQ1M2VkODYyYzBmNzliYmEyZTFmMmI3ZTBmYTY2ZmEwZjMzNmYyODY4ZmUxYmFiMjJiZmFlNTAyM2Y2ZDdiYmVlNzhmOTIyZjc4MTZkMDQiLCJpYXQiOjE2NTgxNTU4OTYsIm5iZiI6MTY1ODE1NTg5NiwiZXhwIjoxNjg5NjkxODk2LCJzdWIiOiI4NzI0Iiwic2NvcGVzIjpbXX0.mmyCyRS-ia216FPFhkzWmKTtgA_ES2Ot5ZocmwWKWKNnS6KumPp6qKZwA6B0zbdlKoEUTBerinhpT08xNl9iqQ";
 
-    @GetMapping("/currentFlights")
-    public List<Flight> getFlights(String date, String departureAirport, String arrivalAirport) {
-        FlightQuery query = new FlightQuery(date, departureAirport, arrivalAirport);
-        String uri = API_ADDRESS + "?access_key=" + API_KEY + query.getSearchParameters();
+    @GetMapping("/flights/{date}&{departureAirport}&{arrivalAirport}")
+    public List<Flight> getFlights(@PathVariable String date, @PathVariable String departureAirport, @PathVariable String arrivalAirport) {
+        try {
+            FlightQuery query = new FlightQuery(date, departureAirport, arrivalAirport);
+            String uri = API_ADDRESS + "?access_key=" + API_KEY + query.getSearchParameters();
 
-        RestTemplate restTemplate = new RestTemplate();
+            RestTemplate restTemplate = new RestTemplate();
 
-        return readFlightData(restTemplate.getForObject(uri, Object.class));
+            return readFlightData(restTemplate.getForObject(uri, Object.class));
 
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 
     private List<Flight> readFlightData(Object allFlights) {
