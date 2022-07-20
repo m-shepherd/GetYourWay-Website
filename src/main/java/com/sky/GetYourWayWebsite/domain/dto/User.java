@@ -1,14 +1,33 @@
-package com.sky.GetYourWayWebsite;
+package com.sky.GetYourWayWebsite.domain.dto;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class User {
+
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name="increment", strategy="increment")
+    private int userId;
     private String username;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
-
     public String getUsername() {
         return username;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public void setUsername(String username) {
