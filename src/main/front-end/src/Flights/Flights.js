@@ -11,7 +11,9 @@ const Flights = () => {
                 const flights = JSON.parse(xhr.responseText);
                 const flightTable = document.querySelector("#flightTable");
                 const flightData = document.querySelector("#flightData");
+                const dataTitle = document.querySelector("#dataTitle");
                 flightData.style.display = "block";
+                dataTitle.style.display = "block";
                 let i = 0
                 for(const flight in flights) {
                     i++;
@@ -35,7 +37,26 @@ const Flights = () => {
     return (
         <div>
             <div className="wrapper">
-                <div className="title-text">
+                <div className="form-container">
+                    <div className="form-inner">
+                        <form onSubmit={getFlights}>
+                            <div className="field">
+                                <input type="date" name="date" placeholder="YYYY-MM-DD"/>
+                            </div>
+                            <div className="field">
+                                <input type="text" name="departureAirport" placeholder="Departure Airport"/>
+                            </div>
+                            <div className="field">
+                                <input type="text" name="arrivalAirport" placeholder="Arrival Airport"/>
+                            </div>
+                            <div className="field btn">
+                                <div className="btn-layer"></div>
+                                <input type="submit" value="Find Flights"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="dataTitle" className="title-text" style={{display: "none"}}>
                     <div className="title login">Flight Data</div>
                 </div>
                 <div id="flightData" className="tableFixHead" style={{display: "none"}}>
@@ -53,12 +74,6 @@ const Flights = () => {
                         <tbody>
                         </tbody>
                     </table>
-                </div>
-                <div className="pad">
-                    <div className="field btn">
-                        <div className="btn-layer"></div>
-                        <input type="submit" onClick={getFlights} value="Get Flights"/>
-                    </div>
                 </div>
             </div>
         </div>
