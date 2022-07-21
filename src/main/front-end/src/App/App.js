@@ -6,7 +6,8 @@ import SignUp from '../Sign-Up/Sign-Up';
 const App = () => {
   return (
     <div className="container">
-      <Login />
+      {/*<Login />*/}
+        <SignUp/>
     </div>
   );
 }
