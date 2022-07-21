@@ -58,6 +58,6 @@ input {
     border: 2px solid lightgrey;
 }
 
-#firstNameText,  #lastNameText{
+#firstNameText,  #lastNameText #emailText{
     text-align: center;
 }
