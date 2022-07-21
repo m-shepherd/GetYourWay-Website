@@ -1,14 +1,14 @@
 import './App.css';
 
-import Login from '../Login/Login';
-import SignUp from '../Sign-Up/Sign-Up';
+import LoginAndSignUp from '../LoginAndSignUp/LoginAndSignUp';
 
 const App = () => {
-  return (
-    <div className="container">
-      <Login />
-    </div>
-  );
+    return (
+        <div className="container">
+          {/*<Login />*/}
+            <LoginAndSignUp/>
+        </div>
+    );
 }
 
 export default App;
