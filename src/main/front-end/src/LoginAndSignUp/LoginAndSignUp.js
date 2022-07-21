@@ -242,7 +242,7 @@ const LoginAndSignUp = () => {
                         <form className="signup" onSubmit={signUpSubmit} method="post" action="localhost:8080/users">
                             <div className="field">
                                 <input type="text" id="username" name="username" required
-                                       pattern="^[A-Za-z][A-Za-z0-9_]{7,31}$" placeholder="Username"
+                                       pattern="^[A-Za-z][A-Za-z0-9_-]{7,31}$" placeholder="Username"
                                        onChange={usernameChange}/>
                             </div>
                             <div className="field">

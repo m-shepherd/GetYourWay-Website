@@ -2,7 +2,9 @@ package com.sky.GetYourWayWebsite.controller;
 
 import com.sky.GetYourWayWebsite.flights.Flight;
 import com.sky.GetYourWayWebsite.flights.FlightQuery;
+import com.sky.GetYourWayWebsite.flights.FlightUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,10 +23,10 @@ import java.util.List;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class FlightController {
     private final String API_ADDRESS = "https://app.goflightlabs.com/flights";
-    private final String API_KEY = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMGQ1M2VkODYyYzBmNzliYmEyZTFmMmI3ZTBmYTY2ZmEwZjMzNmYyODY4ZmUxYmFiMjJiZmFlNTAyM2Y2ZDdiYmVlNzhmOTIyZjc4MTZkMDQiLCJpYXQiOjE2NTgxNTU4OTYsIm5iZiI6MTY1ODE1NTg5NiwiZXhwIjoxNjg5NjkxODk2LCJzdWIiOiI4NzI0Iiwic2NvcGVzIjpbXX0.mmyCyRS-ia216FPFhkzWmKTtgA_ES2Ot5ZocmwWKWKNnS6KumPp6qKZwA6B0zbdlKoEUTBerinhpT08xNl9iqQ";
-
+    private final String API_KEY = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMTA0NTdmZDU1YTM4NjA3OWE0YjA3ZjIzMjVhZTJiMjRlYzA1M2MzMGE3ODJkZTFjMjY3ZmEwZmExMzBjYjBkMzQ1MTViMjVhMDIzMmY0NDAiLCJpYXQiOjE2NTg0MTI0NTksIm5iZiI6MTY1ODQxMjQ1OSwiZXhwIjoxNjg5OTQ4NDU5LCJzdWIiOiI5MDA0Iiwic2NvcGVzIjpbXX0.efxsoJCpmQQDhxvdAj2Kc4LnZ1paHKoji4jm9x6ikMr2Ile1lsBkMjvj0XuMxMSqNh8GSQdOUwHIKG-X0Q5JJQ";
     @GetMapping("/flights/{date}&{departureAirport}&{arrivalAirport}")
     public List<Flight> getFlights(@PathVariable String date, @PathVariable String departureAirport, @PathVariable String arrivalAirport) {
         try {
