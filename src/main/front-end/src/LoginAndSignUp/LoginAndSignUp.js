@@ -1,4 +1,5 @@
 import './LoginInAndSignUp.css';
+import {BrowserRouter, useNavigate} from "react-router-dom";
 
 const LoginAndSignUp = () => {
 
@@ -209,6 +210,8 @@ const LoginAndSignUp = () => {
         radio.checked = true;
     }
 
+    let navigate = useNavigate();
+
     return (
         <div>
             <div className="wrapper">
@@ -232,7 +235,7 @@ const LoginAndSignUp = () => {
                             <div className="field">
                                 <input type="password" name="password" placeholder="Password" required/>
                             </div>
-                            <div className="pass-link"><a href="#">Forgot Password?</a></div>
+                                <div className="pass-link" onClick={() => navigate('/ResetPassword')}><a href="#">Forgot Password?</a></div>
                             <div className="field btn">
                                 <div className="btn-layer"></div>
                                 <input type="submit" value="Login"/>
