@@ -34,7 +34,6 @@ html,body{
     display: flex;
     width: 200%;
     padding-top: 1.5em;
-    padding-bottom: 1.5em;
 }
 .wrapper .title{
     width: 50%;
@@ -82,6 +81,7 @@ html,body{
     font-size: 20px;
     font-weight: 500;
     cursor: pointer;
+    text-align: center;
 }
 .field{
     height: 50px;
@@ -99,13 +99,6 @@ html,body{
     border-bottom-width: 2px;
     font-size: 17px;
     transition: all 0.3s ease;
-}
-
-#flight-title{
-    display: flex;
-    width: 200%;
-    font-size: 20px;
-    font-weight: 450;
 }
 
 .tableFixHead {
@@ -130,6 +123,7 @@ th, td {
     padding: 8px 16px;
 }
 tr:hover {
+    cursor: pointer;
     background-color: #dddddd;
 }
 .wrapper .form_container{
@@ -172,4 +166,7 @@ tr:hover {
 }
 form .field input:focus::placeholder{
     color: #1a75ff;
+}
+.padding{
+    padding-bottom: 1.5em;
 }

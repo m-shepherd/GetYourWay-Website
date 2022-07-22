@@ -11,7 +11,7 @@ const MainPage = () => {
 
     return (
         <div>
-            <div className="padding">
+            <div className={flightStyles.padding}>
                 <div className={mainStyles.wrapper}>
                     <div className={mainStyles.title_text}>
                         <div className={mainStyles.title}>Main Page</div>
@@ -21,7 +21,7 @@ const MainPage = () => {
                 </div>
             </div>
 
-            <div className="padding">
+            <div className={flightStyles.padding}>
                 <div className={flightStyles.wrapper}>
                     <div className={flightStyles.form_container}>
                         <div className={flightStyles.form_inner}>
@@ -45,24 +45,26 @@ const MainPage = () => {
                     <div id="dataTitle" className={flightStyles.title_text} style={{display: "none"}}>
                         <div className={flightStyles.title}>Flight Data</div>
                     </div>
-                    <div id="flightData" className={flightStyles.tableFixHead} style={{display: "none"}}>
-                        <table id="table">
-                            <thead>
-                            {/*<tr id="header">*/}
-                            <th>Departure Airport</th>
-                            <th>Departure Time</th>
-                            <th>Arrival Airport</th>
-                            <th>Arrival Time</th>
-                            <th>Airline</th>
-                            <th>Flight Number</th>
-                            {/*</tr>*/}
-                            </thead>
-                            <tbody id="flightTable"></tbody>
-                        </table>
+                    <div className={flightStyles.padding}>
+                        <div id="flightData" className={flightStyles.tableFixHead} style={{display: "none"}}>
+                            <table id="table">
+                                <thead>
+                                {/*<tr id="header">*/}
+                                <th>Departure Airport</th>
+                                <th>Departure Time</th>
+                                <th>Arrival Airport</th>
+                                <th>Arrival Time</th>
+                                <th>Airline</th>
+                                <th>Flight Number</th>
+                                {/*</tr>*/}
+                                </thead>
+                                <tbody id="flightTable"></tbody>
+                            </table>
+                        </div>
                     </div>
                     <div id="destination" className={`${flightStyles.field} ${flightStyles.btn}`} style={{display: "none"}}>
                         <div className={flightStyles.btn_layer}></div>
-                        <input type="submit" value="Confirm Flight"/>
+                        <input id="confirm" type="submit" value="Confirm Flight"/>
                     </div>
                 </div>
             </div>
