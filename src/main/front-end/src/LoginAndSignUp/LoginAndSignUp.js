@@ -1,4 +1,5 @@
-import './LoginInAndSignUp.css';
+import styles from './LoginInAndSignUp.module.css';
+import "./LoginAndSignUp.css";
 
 const LoginAndSignUp = () => {
 
@@ -190,8 +191,8 @@ const LoginAndSignUp = () => {
     }
 
     function switchToLogin() {
-        const loginText = document.querySelector(".title-text .login");
-        const loginForm = document.querySelector("form.login");
+        const loginText = document.querySelector("#loginText");
+        const loginForm = document.querySelector("#loginForm");
         loginForm.style.marginLeft = "0%";
         loginText.style.marginLeft = "0%";
 
@@ -200,8 +201,8 @@ const LoginAndSignUp = () => {
     }
 
     function switchToSignUp() {
-        const loginText = document.querySelector(".title-text .login");
-        const loginForm = document.querySelector("form.login");
+        const loginText = document.querySelector("#loginText");
+        const loginForm = document.querySelector("#loginForm");
         loginForm.style.marginLeft = "-50%";
         loginText.style.marginLeft = "-50%";
 
@@ -211,63 +212,59 @@ const LoginAndSignUp = () => {
 
     return (
         <div>
-            <div className="wrapper">
-                <div className="title-text">
-                    <div className="title login">Login Form</div>
-                    <div className="title signup">Sign Up Form</div>
+            <div className={styles.wrapper}>
+                <div className={styles.title_text}>
+                    <div id="loginText" className={`${styles.title} ${styles.login}`}>Login Form</div>
+                    <div className={`${styles.title} ${styles.signup}`}>Sign Up Form</div>
                 </div>
-                <div className="form-container">
-                    <div className="slide-controls">
+                <div className={styles.form_container}>
+                    <div className={styles.slide_controls}>
                         <input type="radio" name="slide" id="login" checked onChange={switchToSignUp}/>
                         <input type="radio" name="slide" id="signup" onChange={switchToLogin}/>
-                        <label htmlFor="login" className="slide login" onClick={switchToLogin}>Login</label>
-                        <label htmlFor="signup" className="slide signup" onClick={switchToSignUp}>Sign Up</label>
-                        <div className="slider-tab"></div>
+                        <label htmlFor="login" className={`${styles.slide} ${styles.login}`} onClick={switchToLogin}>Login</label>
+                        <label htmlFor="signup" className={`${styles.slide} ${styles.signup}`} onClick={switchToSignUp}>Sign Up</label>
+                        <div className={styles.slider_tab}></div>
                     </div>
-                    <div className="form-inner">
-                        <form className="login" onSubmit={loginSubmit} method="post" action="localhost:8080/users">
-                            <div className="field">
+                    <div className={styles.form_inner}>
+                        <form id="loginForm" className={styles.login} onSubmit={loginSubmit} method="post" action="localhost:8080/users">
+                            <div className={styles.field}>
                                 <input type="text" name="username" placeholder="Username" required/>
                             </div>
-                            <div className="field">
+                            <div className={styles.field}>
                                 <input type="password" name="password" placeholder="Password" required/>
                             </div>
-                            <div className="pass-link"><a href="#">Forgot Password?</a></div>
-                            <div className="field btn">
-                                <div className="btn-layer"></div>
+                            <div className={styles.pass_link}><a href="#">Forgot Password?</a></div>
+                            <div className={`${styles.field} ${styles.btn}`}>
+                                <div className={styles.btn_layer}></div>
                                 <input type="submit" value="Login"/>
                             </div>
-                            <div className="signup-link">Not A Member? <a onClick={switchToSignUp}>Sign Up Now</a></div>
+                            <div className={styles.signup_link}>Not A Member? <a onClick={switchToSignUp}>Sign Up Now</a></div>
                         </form>
-                        <form className="signup" onSubmit={signUpSubmit} method="post" action="localhost:8080/users">
-                            <div className="field">
+                        <form className={styles.signup} onSubmit={signUpSubmit} method="post" action="localhost:8080/users">
+                            <div className={styles.field}>
                                 <input type="text" id="username" name="username" required
                                        pattern="^[A-Za-z][A-Za-z0-9_-]{7,31}$" placeholder="Username"
                                        onChange={usernameChange}/>
                             </div>
-                            <div className="field">
+                            <div className={styles.field}>
                                 <input type="text" id="firstName" name="firstName" required pattern="[a-zA-Z]{1,16}$"
                                        placeholder="First Name" onChange={firstNameChange}/>
                             </div>
-                            <div className="field">
+                            <div className={styles.field}>
                                 <input type="text" id="lastName" name="lastName" required pattern="[a-zA-Z]{1,16}$"
                                        placeholder="Last Name" onChange={lastNameChange}/>
                             </div>
-                            <div className="field">
+                            <div className={styles.field}>
                                 <input type="text" id="email" name="email" required
                                        pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
                                        placeholder="Email Address" maxLength={64} onChange={emailChange}/>
                             </div>
-                            <div className="field">
+                            <div className={styles.field}>
                                 <input type="password" id="password" name="password" placeholder="Password" required
                                        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,32}$" onChange={passwordChange}/>
                             </div>
-                            {/*<div className="field">*/}
-                            {/*    <input type="password" placeholder="Confirm Password" required*/}
-                            {/*           pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,32}$"/>*/}
-                            {/*</div>*/}
-                            <div className="field btn">
-                                <div className="btn-layer"></div>
+                            <div className={`${styles.field} ${styles.btn}`}>
+                                <div className={styles.btn_layer}></div>
                                 <input type="submit" value="Sign Up"/>
                             </div>
                         </form>
