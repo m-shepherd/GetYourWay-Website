@@ -35,8 +35,9 @@ public class FlightController {
 
             RestTemplate restTemplate = new RestTemplate();
 
-            return readFlightData(restTemplate.getForObject(uri, Object.class));
+//            return readFlightData(restTemplate.getForObject(uri, Object.class));
 
+            return readFlightData(FlightUtils.read("src/main/resources/example-flight-data.txt"));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
@@ -47,22 +48,38 @@ public class FlightController {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode flightJson = mapper.valueToTree(allFlights);
 
-            List<Flight> flightList = new ArrayList<>();
-            ArrayNode arrayNode = (ArrayNode) flightJson;
-            for (int i = 0; i < arrayNode.size(); i++) {
-                JsonNode arrayElement = arrayNode.get(i);
-                Flight flight = parseFlight(arrayElement);
-
-                flightList.add(flight);
-
-            }
-
-            return flightList;
+            return getFlights((ArrayNode) flightJson);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private List<Flight> readFlightData(String allFlights) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode flightJson = mapper.readTree(allFlights);
+
+            return getFlights((ArrayNode) flightJson);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private List<Flight> getFlights(ArrayNode flightJson) {
+        List<Flight> flightList = new ArrayList<>();
+        for (int i = 0; i < flightJson.size(); i++) {
+            JsonNode arrayElement = flightJson.get(i);
+            Flight flight = parseFlight(arrayElement);
+
+            flightList.add(flight);
+
+        }
+
+        return flightList;
     }
 
     private Flight parseFlight(JsonNode arrayElement) {

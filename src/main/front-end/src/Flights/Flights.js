@@ -2,7 +2,7 @@ import './Flights.css';
 
 const Flights = () => {
 
-    function getFlights(event) {
+    function getFlights() {
         const xhr = new XMLHttpRequest();
         xhr.open("GET", "http://localhost:8080/flights/2022-07-13&LHR&FRA", true);
         xhr.setRequestHeader("Content-Type", "application/json");
@@ -14,24 +14,64 @@ const Flights = () => {
                 const dataTitle = document.querySelector("#dataTitle");
                 flightData.style.display = "block";
                 dataTitle.style.display = "block";
-                let i = 0
                 for(const flight in flights) {
-                    i++;
-                    // if (i <= 3) {
-                        const row = flightTable.insertRow(-1)
-                        let j = 0;
-                        for (const key in flights[flight]) {
-                            if (j !== 0) {
-                                const cell = row.insertCell(j - 1);
-                                cell.innerHTML = flights[flight][key];
-                            }
-                            j ++;
+                    const row = flightTable.insertRow(-1)
+                    row.setAttribute('data-href', '#');
+                    row.setAttribute('onClick', '{clicked}');
+                    let i = 0;
+                    for (const key in flights[flight]) {
+                        if (i !== 0) {
+                            const cell = row.insertCell(i - 1);
+                            cell.innerHTML = flights[flight][key];
                         }
-                    // }
+                        i ++;
+                    }
                 }
+                makeRowsClickable();
             }
         };
         xhr.send();
+    }
+
+    function makeRowsClickable() {
+        const table = document.getElementById("table");
+        const rows = table.getElementsByTagName("tr");
+        for (let i = 0; i < rows.length; i++) {
+            const currentRow = table.rows[i];
+            const createClickHandler = function() {
+                return function(event) {
+                    const isClicked = event.target.parentElement.classList.contains('clicked');
+                    const clickedItems = document.getElementsByClassName('clicked');
+                    for (let i = 0; i < clickedItems.length; i++) {
+                        clickedItems[i].classList.remove('clicked');
+                    }
+                    if (isClicked) {
+                        event.target.parentElement.classList.remove('clicked');
+                    } else {
+                        event.target.parentElement.classList.toggle('clicked');
+                    }
+                    showConfirmButton();
+                };
+            };
+            currentRow.onclick = createClickHandler();
+        }
+    }
+
+    function showConfirmButton() {
+        let clicked = false;
+        const clickedItems = document.getElementsByClassName('clicked');
+        for (let i = 0; i < clickedItems.length; i++) {
+            if (clickedItems[i].classList.contains('clicked')) {
+                clicked = true;
+            }
+        }
+        const destination = document.querySelector("#destination");
+        if (clicked) {
+
+            destination.style.display = "block";
+        } else {
+            destination.style.display = "none";
+        }
     }
 
     return (
@@ -60,20 +100,23 @@ const Flights = () => {
                     <div className="title login">Flight Data</div>
                 </div>
                 <div id="flightData" className="tableFixHead" style={{display: "none"}}>
-                    <table id="flightTable">
+                    <table id="table">
                         <thead>
-                        <tr id="header">
+                        {/*<tr id="header">*/}
                             <th>Departure Airport</th>
                             <th>Departure Time</th>
                             <th>Arrival Airport</th>
                             <th>Arrival Time</th>
                             <th>Airline</th>
                             <th>Flight Number</th>
-                        </tr>
+                        {/*</tr>*/}
                         </thead>
-                        <tbody>
-                        </tbody>
+                        <tbody id="flightTable"></tbody>
                     </table>
+                </div>
+                <div id="destination" className="field btn" style={{display: "none"}}>
+                    <div className="btn-layer"></div>
+                    <input type="submit" value="Confirm Flights"/>
                 </div>
             </div>
         </div>

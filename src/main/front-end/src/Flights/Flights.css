@@ -18,12 +18,12 @@ html,body{
     color: #fff;
 }
 .wrapper{
-    overflow: hidden;
-    max-width: 100%;
+    overflow: auto;
+    /*max-height: 85%;*/
+    max-width: 85%;
     background: #fff;
     padding: 30px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
     border-radius: 15px;
     box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
 }
@@ -110,7 +110,7 @@ html,body{
 
 .tableFixHead {
     overflow-y: auto;
-    height: 250px;
+    height: 30em;
 }
 .tableFixHead thead th {
     position: sticky;
@@ -175,4 +175,10 @@ tr:hover {
 }
 form .field input:focus::placeholder{
     color: #1a75ff;
+}
+
+.clicked{
+    color: #fff;
+    background: -webkit-linear-gradient(right,#003366,#004080,#0059b3
+    , #0073e6);
 }
