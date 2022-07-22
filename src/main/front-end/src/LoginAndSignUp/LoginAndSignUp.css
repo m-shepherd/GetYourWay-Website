@@ -1,21 +1,3 @@
-#signup:checked ~ .slider_tab{
-    left: 50%;
-}
-#signup:checked ~ label.signup{
-    color: #fff;
-    cursor: default;
-    user-select: none;
-}
-#signup:checked ~ label.login{
-    color: #000;
-}
-#login:checked ~ label.signup{
-    color: #000;
-}
-#login:checked ~ label.login{
-    cursor: default;
-    user-select: none;
-}
 #username.incorrect, #firstName.incorrect, #lastName.incorrect, #email.incorrect, #password.incorrect {
     border-color: red;
     color: red;

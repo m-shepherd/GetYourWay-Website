@@ -223,7 +223,7 @@ const LoginAndSignUp = () => {
                         <input type="radio" name="slide" id="signup" onChange={switchToLogin}/>
                         <label htmlFor="login" className={`${styles.slide} ${styles.login}`} onClick={switchToLogin}>Login</label>
                         <label htmlFor="signup" className={`${styles.slide} ${styles.signup}`} onClick={switchToSignUp}>Sign Up</label>
-                        <div className={styles.slider_tab}></div>
+                        <div id="sliderTab" className={styles.slider_tab}></div>
                     </div>
                     <div className={styles.form_inner}>
                         <form id="loginForm" className={styles.login} onSubmit={loginSubmit} method="post" action="localhost:8080/users">
