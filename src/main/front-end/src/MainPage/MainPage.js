@@ -1,4 +1,4 @@
-import './MainPage.css'
+import styles from'./MainPage.module.css'
 import {useNavigate} from "react-router-dom";
 
 const MainPage = () => {
@@ -7,9 +7,13 @@ const MainPage = () => {
 
     return (
         <div>
-            <h1>Main Page</h1>
-            <div className="signup-link" onClick={() => navigate('/')}><a>Log out</a></div>
-            <div className="signup-link" onClick={() => navigate('/Flights')}><a>Find Flights</a></div>
+            <div className={styles.wrapper}>
+                <div className={styles.title_text}>
+                    <div className={styles.title}>Main Page</div>
+                </div>
+                <div className={styles.pass_link} onClick={() => navigate('/')}><a href="">Log Out</a></div>
+                <div className={styles.pass_link} onClick={() => navigate('/Flights')}><a href="">Find Flights</a></div>
+            </div>
         </div>
     )
 }

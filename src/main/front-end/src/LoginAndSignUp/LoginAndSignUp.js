@@ -240,7 +240,8 @@ const LoginAndSignUp = () => {
                                 <div className={styles.btn_layer}></div>
                                 <input type="submit" value="Login"/>
                             </div>
-                            <div className={styles.signup_link}>Not A Member? <a onClick={switchToSignUp}>Sign Up Now</a></div>
+
+                            <div className={styles.signup_link}>Not A Member? <a href="#" onClick={switchToSignUp}>Sign Up Now</a></div>
                         </form>
                         <form className={styles.signup} onSubmit={signUpSubmit} method="post" action="localhost:8080/users">
                             <div className={styles.field}>
