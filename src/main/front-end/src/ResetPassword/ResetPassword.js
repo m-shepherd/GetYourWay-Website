@@ -1,6 +1,6 @@
-import './ResetPassword.css';
+import styles from './ResetPassword.module.css';
+import './ResetPassword.css'
 import {useNavigate} from "react-router-dom";
-import axios from 'axios';
 
 
 const ResetPassword = () =>  {
@@ -39,24 +39,23 @@ const ResetPassword = () =>  {
 
     return (
         <div>
-            <div className="wrapper">
-                <div className="title-text">
-                    <div className="title login">Reset Your Password</div>
+            <div className={styles.wrapper}>
+                <div className={styles.title_text}>
+                    <div className={styles.title}>Reset Your Password</div>
                 </div>
-                <div className="form-container">
-                    <div className="form-inner">
-                        <form className="login" method="post">
-                            <div className="field">
-                                <input type="text" name="email" placeholder="Email" required
+                <div className={styles.form_container}>
+                    <div className={styles.form_inner}>
+                        <form method="post">
+                            <div className={styles.field}>
+                                <input type="text" id="email" required
                                        pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
                                        placeholder="Email Address" maxLength={64} onChange={emailChange}/>
                             </div>
-                            <div className="field btn">
-                                <div className="btn-layer"></div>
+                            <div className={`${styles.field} ${styles.btn}`}>
+                                <div className={styles.btn_layer}></div>
                                 <input type="submit" value="Send Recovery Email" onSubmit={submitEmail}/>
                             </div>
-                            <div className="signup-link" onClick={() => navigate('/')}><a>Go Back to Login</a>
-                            </div>
+                            <div className={styles.pass_link} onClick={() => navigate('/')}><a href="">Back To Login</a></div>
                         </form>
                     </div>
                 </div>

@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 
 public class FlightUtils {
 
-    private static void write(String filename, String flightData) {
+    public static void write(String filename, String flightData) {
         try(PrintWriter writer = new PrintWriter(filename)) {
             writer.print(flightData);
         } catch (Exception e) {
@@ -14,7 +14,7 @@ public class FlightUtils {
         }
     }
 
-    private static String read(String filename) {
+    public static String read(String filename) {
         try {
             return Files.readString(Paths.get(filename));
         } catch (Exception e) {
