@@ -1,7 +1,9 @@
 import './LoginInAndSignUp.css';
-import {BrowserRouter, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const LoginAndSignUp = () => {
+
+    let navigate = useNavigate();
 
     function loginSubmit(event) {
         event.preventDefault();
@@ -22,9 +24,9 @@ const LoginAndSignUp = () => {
             if (xhr.readyState === 4)  {
                 const serverResponse = xhr.responseText;
                 console.log(serverResponse);
-                // if (serverResponse === '"OK"') {
-                //     window.location.replace("index.html")
-                // }
+                if (serverResponse === '"OK"') {
+                    navigate('/MainPage')
+                 }
             }
         };
         xhr.send();
@@ -210,7 +212,6 @@ const LoginAndSignUp = () => {
         radio.checked = true;
     }
 
-    let navigate = useNavigate();
 
     return (
         <div>
