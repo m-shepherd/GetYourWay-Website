@@ -57,7 +57,7 @@ const ResetPassword = () =>  {
                                 <div className={styles.btn_layer}></div>
                                 <input type="submit" value="Send Recovery Email" onSubmit={submitEmail}/>
                             </div>
-                            <div className={styles.pass_link} onClick={() => navigate('/')}><a href="">Back To Login</a></div>
+                            <div className={styles.pass_link} onClick={() => navigate('/')}><a href="#">Back To Login</a></div>
                         </form>
                     </div>
                 </div>

@@ -11,7 +11,7 @@ const MainPage = () => {
 
     return (
         <div>
-            <div className={flightStyles.padding}>
+            <div className={mainStyles.padding}>
                 <div className={mainStyles.wrapper}>
                     <div className={mainStyles.title_text}>
                         <div className={mainStyles.title}>Main Page</div>

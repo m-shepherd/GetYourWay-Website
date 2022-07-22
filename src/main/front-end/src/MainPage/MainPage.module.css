@@ -50,3 +50,6 @@ html,body{
 .pass_link a:hover {
     text-decoration: underline;
 }
+.padding{
+    padding-bottom: 1.5em;
+}
