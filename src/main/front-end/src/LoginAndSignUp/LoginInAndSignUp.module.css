@@ -19,9 +19,11 @@ html,body{
 }
 .wrapper{
     overflow: hidden;
-    max-width: 390px;
+    width: 35em;
+    max-width: 35em;
     background: #fff;
     padding: 30px;
+    margin: auto;
     border-radius: 15px;
     box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
 }
@@ -78,7 +80,7 @@ input[type="radio"]{
 }
 
 .wrapper .form_container{
-    width: 100%;
+    max-width: 100%;
     overflow: hidden;
 }
 .form_container .form_inner{
@@ -150,7 +152,7 @@ form .btn .btn_layer{
     background: -webkit-linear-gradient(right,#003366,#004080,#0059b3
     , #0073e6);
     border-radius: 15px;
-    transition: all 0.4s ease;;
+    transition: all 0.4s ease;
 }
 form .btn:hover .btn_layer{
     left: 0;
@@ -168,4 +170,19 @@ form .btn input[type="submit"]{
     font-size: 20px;
     font-weight: 500;
     cursor: pointer;
+}
+.error {
+    background-color: #fce4e4;
+    border: 1px solid #fcc2c3;
+    border-radius: 7px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    color: #cc0033;
+    font-weight: bold;
+    font-size: 14px;
+    position: relative;
+    padding: 1em;
+    margin: auto;
+    width:85%;
+    height:fit-content;
 }

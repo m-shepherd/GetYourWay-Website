@@ -59,28 +59,31 @@ const LoginAndSignUp = () => {
         const username = document.querySelector("#username")
 
         const validUsername = username.checkValidity();
-        // const error = document.querySelector(".firstNameText")
+        const error = document.querySelector("#usernameError")
 
         if (username.value.length === 0) {
-            // error.style.display = "none";
+            error.style.display = "none";
             document.getElementById("username").classList.remove("incorrect");
         } else {
 
-            if (!username && username.value.length >= 15) {
-                // error.style.display = "block";
-                // error.innerHTML = 'Too Long';
+            if (!validUsername && username.value.length > 32) {
+                error.style.display = "block";
+                error.innerHTML = "Username Has To Be Shorter Than 32 Characters";
                 document.getElementById("username").classList.add("incorrect");
-            } else if (!validUsername && username.value.length <= 1) {
-                // error.style.display = "block";
-                // error.innerHTML = 'Too Short';
+            } else if (!validUsername && username.value.length < 8) {
+                error.style.display = "block";
+                error.innerHTML = "Username Has To Be Longer Than 8 Characters";
                 document.getElementById("username").classList.add("incorrect");
             } else if (!validUsername) {
-                console.error("Invalid username");
-                // error.style.display = "block";
-                // error.innerHTML = 'Only Lower/Upper Case Characters Allowed';
+                error.style.display = "block";
+                if (!username.value.charAt(0).match(/[a-z]/i)) {
+                    error.innerHTML = "Username Has To Start With A Letter";
+                } else {
+                    error.innerHTML = "Username Can Only Contain Letters, Underscores And Dashes";
+                }
                 document.getElementById("username").classList.add("incorrect");
             } else {
-                // error.style.display = "none";
+                error.style.display = "none";
                 document.getElementById("username").classList.remove("incorrect");
             }
         }
@@ -91,28 +94,27 @@ const LoginAndSignUp = () => {
         const firstName = document.querySelector("#firstName")
 
         const validFirstName = firstName.checkValidity();
-        // const error = document.querySelector(".firstNameText")
+        const error = document.querySelector("#firstNameError")
 
         if (firstName.value.length === 0) {
-            // error.style.display = "none";
+            error.style.display = "none";
             document.getElementById("firstName").classList.remove("incorrect");
         } else {
 
-            if (!validFirstName && firstName.value.length >= 15) {
-                // error.style.display = "block";
-                // error.innerHTML = 'Too Long';
+            if (!validFirstName && firstName.value.length > 16) {
+                error.style.display = "block";
+                error.innerHTML = "First Name Has To Be Shorter Than 16 Characters";
                 document.getElementById("firstName").classList.add("incorrect");
             } else if (!validFirstName && firstName.value.length <= 1) {
-                // error.style.display = "block";
-                // error.innerHTML = 'Too Short';
+                error.style.display = "block";
+                error.innerHTML = "First Name Has To Be Longer Than 1 Characters";
                 document.getElementById("firstName").classList.add("incorrect");
             } else if (!validFirstName) {
-                console.error("Invalid firstName");
-                // error.style.display = "block";
-                // error.innerHTML = 'Only Lower/Upper Case Characters Allowed';
+                error.style.display = "block";
+                error.innerHTML = "First Name Can Only Contain Letters";
                 document.getElementById("firstName").classList.add("incorrect");
             } else {
-                // error.style.display = "none";
+                error.style.display = "none";
                 document.getElementById("firstName").classList.remove("incorrect");
             }
         }
@@ -123,27 +125,27 @@ const LoginAndSignUp = () => {
         const lastName = document.querySelector("#lastName")
 
         const validLastName = lastName.checkValidity();
-        // const error = document.querySelector(".lastNameText")
+        const error = document.querySelector("#lastNameError")
 
         if (lastName.value.length === 0) {
-            // error.style.display = "none";
+            error.style.display = "none";
             document.getElementById("lastName").classList.remove("incorrect");
         } else {
 
             if (!validLastName && lastName.value.length >= 15) {
-                // error.style.display = "block";
-                // error.innerHTML = 'Too Long';
+                error.style.display = "block";
+                error.innerHTML = "Last Name Has To Be Shorter Than 16 Characters";
                 document.getElementById("lastName").classList.add("incorrect");
             } else if (!validLastName&& lastName.value.length <= 1) {
-                // error.style.display = "block";
-                // error.innerHTML = 'Too Short';
+                error.style.display = "block";
+                error.innerHTML = "Last Name Has To Be Shorter Than 16 Characters";
                 document.getElementById("lastName").classList.add("incorrect");
             } else if (!validLastName) {
-                // error.style.display = "block";
-                // error.innerHTML = 'Only Lower/Upper Case Characters Allowed';
+                error.style.display = "block";
+                error.innerHTML = "First Name Can Only Contain Letters";
                 document.getElementById("lastName").classList.add("incorrect");
             } else {
-                // error.style.display = "none";
+                error.style.display = "none";
                 document.getElementById("lastName").classList.remove("incorrect");
             }
         }
@@ -153,17 +155,18 @@ const LoginAndSignUp = () => {
         const email = document.querySelector("#email")
 
         const validEmail = email.checkValidity();
-        // const error = document.querySelector(".emailText")
+        const error = document.querySelector("#emailError")
 
         if (email.value.length === 0) {
-            // error.style.display = "none";
+            error.style.display = "none";
             document.getElementById("email").classList.remove("incorrect");
         } else {
             if (!validEmail) {
-                // error.style.display = "block";
+                error.style.display = "block";
+                error.innerHTML = "Email Must Follow The Format name@address.xyz"
                 document.getElementById("email").classList.add("incorrect");
             } else {
-                // error.style.display = "none";
+                error.style.display = "none";
                 document.getElementById("email").classList.remove("incorrect");
             }
         }
@@ -174,17 +177,24 @@ const LoginAndSignUp = () => {
         const password = document.querySelector("#password")
 
         const validPassword = password.checkValidity();
-        // const error = document.querySelector(".emailText")
+        const error = document.querySelector("#passwordError")
 
         if (password.value.length === 0) {
-            // error.style.display = "none";
+            error.style.display = "none";
             document.getElementById("password").classList.remove("incorrect");
         } else {
-            if (!validPassword) {
-                // error.style.display = "block";
+            if (!validPassword && password.value.length > 32) {
+                error.style.display = "block";
+                error.innerHTML = "Password Has To Be Shorter Than 32 Characters";
+            } else if (!validPassword && password.value.length < 8) {
+                error.style.display = "block";
+                error.innerHTML = "First Name Has To Be Longer Than 8 Characters";
+            } else if (!validPassword) {
+                error.style.display = "block";
+                error.innerHTML = "Password Must Contain At Least 1 Letter And 1 Number"
                 document.getElementById("password").classList.add("incorrect");
             } else {
-                // error.style.display = "none";
+                error.style.display = "none";
                 document.getElementById("password").classList.remove("incorrect");
             }
         }
@@ -240,28 +250,28 @@ const LoginAndSignUp = () => {
         <div>
             <div className={styles.wrapper}>
                 <div className={styles.title_text}>
-                    <div id="loginText" className={`${styles.title} ${styles.login}`}>Login Form</div>
+                    <div id="loginText" className={styles.title}>Login Form</div>
                     <div className={`${styles.title} ${styles.signup}`}>Sign Up Form</div>
                 </div>
                 <div className={styles.form_container}>
                     <div className={styles.slide_controls}>
                         <input type="radio" name="slide" id="login" checked onChange={switchToSignUp}/>
                         <input type="radio" name="slide" id="signup" onChange={switchToLogin}/>
-                        <label id="loginLabel" htmlFor="login" className={`${styles.slide} ${styles.login}`}
+                        <label id="loginLabel" htmlFor="login" className={styles.slide}
                                onClick={switchToLogin} style={{cursor: "default"}}>Login</label>
                         <label id="signUpLabel" htmlFor="signup" className={`${styles.slide} ${styles.signup}`}
                                onClick={switchToSignUp}>Sign Up</label>
                         <div id="sliderTab" className={styles.slider_tab}></div>
                     </div>
                     <div className={styles.form_inner}>
-                        <form id="loginForm" className={styles.login} onSubmit={loginSubmit} method="post" action="localhost:8080/users">
+                        <form id="loginForm" onSubmit={loginSubmit} method="post" action="localhost:8080/users">
                             <div className={styles.field}>
                                 <input type="text" name="username" placeholder="Username" required/>
                             </div>
                             <div className={styles.field}>
                                 <input type="password" name="password" placeholder="Password" required/>
                             </div>
-                            <div className={styles.pass_link} onClick={() => navigate('/ResetPassword')}><a href="">Forgot Password?</a></div>
+                            <div className={styles.pass_link} onClick={() => navigate('/ResetPassword')}><a href="#">Forgot Password?</a></div>
                             <div className={`${styles.field} ${styles.btn}`}>
                                 <div className={styles.btn_layer}></div>
                                 <input type="submit" value="Login"/>
@@ -275,23 +285,30 @@ const LoginAndSignUp = () => {
                                        pattern="^[A-Za-z][A-Za-z0-9_-]{7,31}$" placeholder="Username"
                                        onChange={usernameChange}/>
                             </div>
+                            <div id="usernameError" className={styles.error} style={{display: 'none', textAlign: 'center'}}></div>
+
                             <div className={styles.field}>
                                 <input type="text" id="firstName" name="firstName" required pattern="[a-zA-Z]{1,16}$"
                                        placeholder="First Name" onChange={firstNameChange}/>
                             </div>
+                            <div id="firstNameError" className={styles.error} style={{display: 'none', textAlign: 'center'}}></div>
+
                             <div className={styles.field}>
                                 <input type="text" id="lastName" name="lastName" required pattern="[a-zA-Z]{1,16}$"
                                        placeholder="Last Name" onChange={lastNameChange}/>
                             </div>
+                            <div id="lastNameError" className={styles.error} style={{display: 'none', textAlign: 'center'}}></div>
                             <div className={styles.field}>
                                 <input type="text" id="email" name="email" required
                                        pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
                                        placeholder="Email Address" maxLength={64} onChange={emailChange}/>
                             </div>
+                            <div id="emailError" className={styles.error} style={{display: 'none', textAlign: 'center'}}></div>
                             <div className={styles.field}>
                                 <input type="password" id="password" name="password" placeholder="Password" required
                                        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,32}$" onChange={passwordChange}/>
                             </div>
+                            <div id="passwordError" className={styles.error} style={{display: 'none', textAlign: 'center'}}></div>
                             <div className={`${styles.field} ${styles.btn}`}>
                                 <div className={styles.btn_layer}></div>
                                 <input type="submit" value="Sign Up"/>

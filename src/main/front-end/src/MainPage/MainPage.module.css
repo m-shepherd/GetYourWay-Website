@@ -19,7 +19,7 @@ html,body{
 }
 
 .wrapper{
-    overflow: auto;
+    overflow: hidden;
     max-width: 35%;
     background: #fff;
     padding: 30px;

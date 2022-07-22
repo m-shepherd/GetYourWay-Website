@@ -2,6 +2,7 @@ import {useNavigate} from "react-router-dom";
 import mainStyles from'./MainPage.module.css';
 import './MainPage.css';
 import flightStyles from "../Flights/Flights.module.css";
+import '../Flights/Flights.css';
 import {getFlights} from '../Flights/Flights';
 
 const MainPage = () => {
@@ -61,7 +62,7 @@ const MainPage = () => {
                     </div>
                     <div id="destination" className={`${flightStyles.field} ${flightStyles.btn}`} style={{display: "none"}}>
                         <div className={flightStyles.btn_layer}></div>
-                        <input type="submit" value="Confirm Flights"/>
+                        <input type="submit" value="Confirm Flight"/>
                     </div>
                 </div>
             </div>

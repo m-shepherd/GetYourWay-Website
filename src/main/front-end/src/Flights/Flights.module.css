@@ -18,8 +18,9 @@ html,body{
     color: #fff;
 }
 .wrapper{
-    overflow: auto;
-    max-width: 95%;
+    overflow: hidden;
+    width: 65em;
+    max-width: 65em;
     background: #fff;
     padding: 30px;
     margin: auto;
@@ -149,7 +150,7 @@ tr:hover {
 .form_inner form .field{
     height: 50px;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 0;
 }
 .form_inner form .field input{
     height: 100%;
