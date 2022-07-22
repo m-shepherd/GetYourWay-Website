@@ -18,7 +18,7 @@ html,body{
     color: #fff;
 }
 .wrapper{
-    overflow: auto;
+    overflow: hidden;
     max-width: 95%;
     background: #fff;
     padding: 30px;
