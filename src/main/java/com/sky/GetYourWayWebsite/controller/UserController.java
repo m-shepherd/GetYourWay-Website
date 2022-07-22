@@ -26,6 +26,15 @@ public class UserController {
         Optional<User> possibleUser = userService.findByUsername(username);
         return possibleUser.isPresent();
     }
+
+    @GetMapping("/users/getUserByEmail/{email}")
+    public HttpStatus checkUserPresentByEmail(@PathVariable String email){
+        if (userService.findByEmail(email).isPresent()){
+            return HttpStatus.OK;
+        } else {
+            return HttpStatus.BAD_REQUEST;
+        }
+    }
     
     @PostMapping("/users")
     public HttpStatus createUser(@RequestBody User newUser) {

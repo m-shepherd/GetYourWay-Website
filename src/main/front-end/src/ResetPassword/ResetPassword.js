@@ -8,7 +8,7 @@ const ResetPassword = () =>  {
     let navigate = useNavigate();
 
     function emailChange() {
-        const email = document.querySelector("#email")
+        const email = document.querySelector("#email");
 
         const validEmail = email.checkValidity();
         // const error = document.querySelector(".emailText")
@@ -28,14 +28,50 @@ const ResetPassword = () =>  {
 
     }
 
+    function sendEmail(email){
+            const emailSettings = {
+                "recipient": email,
+                "msgBody": "Success",
+                "subject": "Test email"
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:8080/sendMail");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify(emailSettings));
+
+    }
+
+    function checkEmailIsValid(email){
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://localhost:8080/users/getUserByEmail/" + email);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4)  {
+                const serverResponse = xhr.responseText;
+                console.log(serverResponse);
+                if (serverResponse === '"OK"') {
+                    sendEmail(email)
+                }
+            }
+        };
+    }
+
+
     function submitEmail(event) {
         event.preventDefault();
+
+        const data = new FormData(event.target);
+
+        const object = {};
+        data.forEach((value, key) => object[key] = value);
+        const json = JSON.stringify(object);
+        const jsonData = JSON.parse(json);
+
+        checkEmailIsValid(jsonData.email);
     }
 
-    function sendEmail(event){
-        event.preventDefault();
-
-    }
 
     return (
         <div>
@@ -45,15 +81,15 @@ const ResetPassword = () =>  {
                 </div>
                 <div className="form-container">
                     <div className="form-inner">
-                        <form className="login" method="post">
+                        <form className="login" method="post" onSubmit={submitEmail}>
                             <div className="field">
-                                <input type="text" name="email" placeholder="Email" required
+                                <input type="text" id="email" name="email" placeholder="Email" required
                                        pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
                                        placeholder="Email Address" maxLength={64} onChange={emailChange}/>
                             </div>
                             <div className="field btn">
                                 <div className="btn-layer"></div>
-                                <input type="submit" value="Send Recovery Email" onSubmit={submitEmail}/>
+                                <input type="submit" value="Send Recovery Email"/>
                             </div>
                             <div className="signup-link" onClick={() => navigate('/')}><a>Go Back to Login</a>
                             </div>
