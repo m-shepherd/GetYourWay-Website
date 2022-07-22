@@ -199,6 +199,18 @@ const LoginAndSignUp = () => {
 
         const radio = document.querySelector("#login");
         radio.checked = true;
+
+        const sliderTab = document.querySelector("#sliderTab");
+        sliderTab.style.left = "0%";
+
+        const loginLabel = document.querySelector("#loginLabel");
+        loginLabel.style.color = "#fff";
+        loginLabel.style.cursor = "default";
+        loginLabel.style.userSelect = "none";
+
+        const signUpLabel = document.querySelector("#signUpLabel");
+        signUpLabel.style.color = "#000";
+        signUpLabel.style.cursor = "pointer";
     }
 
     function switchToSignUp() {
@@ -209,6 +221,18 @@ const LoginAndSignUp = () => {
 
         const radio = document.querySelector("#signup");
         radio.checked = true;
+
+        const sliderTab = document.querySelector("#sliderTab");
+        sliderTab.style.left = "50%";
+
+        const signUpLabel = document.querySelector("#signUpLabel");
+        signUpLabel.style.color = "#fff";
+        signUpLabel.style.cursor = "default";
+        signUpLabel.style.userSelect = "none";
+
+        const loginLabel = document.querySelector("#loginLabel");
+        loginLabel.style.color = "#000";
+        loginLabel.style.cursor = "pointer";
     }
 
 
@@ -223,8 +247,10 @@ const LoginAndSignUp = () => {
                     <div className={styles.slide_controls}>
                         <input type="radio" name="slide" id="login" checked onChange={switchToSignUp}/>
                         <input type="radio" name="slide" id="signup" onChange={switchToLogin}/>
-                        <label htmlFor="login" className={`${styles.slide} ${styles.login}`} onClick={switchToLogin}>Login</label>
-                        <label htmlFor="signup" className={`${styles.slide} ${styles.signup}`} onClick={switchToSignUp}>Sign Up</label>
+                        <label id="loginLabel" htmlFor="login" className={`${styles.slide} ${styles.login}`}
+                               onClick={switchToLogin} style={{cursor: "default"}}>Login</label>
+                        <label id="signUpLabel" htmlFor="signup" className={`${styles.slide} ${styles.signup}`}
+                               onClick={switchToSignUp}>Sign Up</label>
                         <div id="sliderTab" className={styles.slider_tab}></div>
                     </div>
                     <div className={styles.form_inner}>
