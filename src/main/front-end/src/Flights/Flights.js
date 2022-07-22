@@ -81,7 +81,7 @@ const Flights = () => {
                     <div className="form-inner">
                         <form onSubmit={getFlights}>
                             <div className="field">
-                                <input type="date" name="date" placeholder="YYYY-MM-DD"/>
+                                <input type="date" name="date" min={new Date().toISOString().split('T')[0]} placeholder="YYYY-MM-DD"/>
                             </div>
                             <div className="field">
                                 <input type="text" name="departureAirport" placeholder="Departure Airport"/>
