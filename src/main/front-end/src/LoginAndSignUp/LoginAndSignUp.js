@@ -271,7 +271,7 @@ const LoginAndSignUp = () => {
                             <div className={styles.field}>
                                 <input type="password" name="password" placeholder="Password" required/>
                             </div>
-                            <div className={styles.pass_link} onClick={() => navigate('/ResetPassword')}><a href="">Forgot Password?</a></div>
+                            <div className={styles.pass_link} onClick={() => navigate('/ResetPassword')}><a href="#">Forgot Password?</a></div>
                             <div className={`${styles.field} ${styles.btn}`}>
                                 <div className={styles.btn_layer}></div>
                                 <input type="submit" value="Login"/>

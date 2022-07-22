@@ -11,17 +11,18 @@ const ResetPassword = () =>  {
         const email = document.querySelector("#email")
 
         const validEmail = email.checkValidity();
-        // const error = document.querySelector(".emailText")
+        const error = document.querySelector("#emailError")
 
         if (email.value.length === 0) {
-            // error.style.display = "none";
+            error.style.display = "none";
             document.getElementById("email").classList.remove("incorrect");
         } else {
             if (!validEmail) {
-                // error.style.display = "block";
+                error.style.display = "block";
+                error.innerHTML = "Email Must Follow The Format name@address.xyz"
                 document.getElementById("email").classList.add("incorrect");
             } else {
-                // error.style.display = "none";
+                error.style.display = "none";
                 document.getElementById("email").classList.remove("incorrect");
             }
         }
@@ -51,6 +52,7 @@ const ResetPassword = () =>  {
                                        pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
                                        placeholder="Email Address" maxLength={64} onChange={emailChange}/>
                             </div>
+                            <div id="emailError" className={styles.error} style={{display: 'none', textAlign: 'center'}}></div>
                             <div className={`${styles.field} ${styles.btn}`}>
                                 <div className={styles.btn_layer}></div>
                                 <input type="submit" value="Send Recovery Email" onSubmit={submitEmail}/>

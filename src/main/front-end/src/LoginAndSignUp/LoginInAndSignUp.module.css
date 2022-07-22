@@ -19,7 +19,8 @@ html,body{
 }
 .wrapper{
     overflow: hidden;
-    width: 100%;
+    width: 35em;
+    max-width: 35em;
     background: #fff;
     padding: 30px;
     margin: auto;
@@ -79,7 +80,7 @@ input[type="radio"]{
 }
 
 .wrapper .form_container{
-    width: 100%;
+    max-width: 100%;
     overflow: hidden;
 }
 .form_container .form_inner{
@@ -182,5 +183,6 @@ form .btn input[type="submit"]{
     position: relative;
     padding: 1em;
     margin: auto;
-    width: 85%;
+    width:85%;
+    height:fit-content;
 }
