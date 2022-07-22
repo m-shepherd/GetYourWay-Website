@@ -1,7 +1,10 @@
 import styles from './LoginInAndSignUp.module.css';
-import "./LoginAndSignUp.css";
+import './LoginAndSignUp.css';
+import {useNavigate} from "react-router-dom";
 
 const LoginAndSignUp = () => {
+
+    let navigate = useNavigate();
 
     function loginSubmit(event) {
         event.preventDefault();
@@ -21,10 +24,9 @@ const LoginAndSignUp = () => {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4)  {
                 const serverResponse = xhr.responseText;
-                console.log(serverResponse);
-                // if (serverResponse === '"OK"') {
-                //     window.location.replace("index.html")
-                // }
+                if (serverResponse === '"OK"') {
+                    navigate('/MainPage')
+                 }
             }
         };
         xhr.send();
@@ -45,10 +47,9 @@ const LoginAndSignUp = () => {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4)  {
                 const serverResponse = xhr.responseText;
-                console.log(serverResponse);
-                // if (serverResponse === '"CREATED"') {
-                //     window.location.replace("index.html")
-                // }
+                if (serverResponse === '"CREATED"') {
+                    navigate('/MainPage')
+                }
             }
         };
         xhr.send(json);
@@ -210,6 +211,7 @@ const LoginAndSignUp = () => {
         radio.checked = true;
     }
 
+
     return (
         <div>
             <div className={styles.wrapper}>
@@ -233,7 +235,7 @@ const LoginAndSignUp = () => {
                             <div className={styles.field}>
                                 <input type="password" name="password" placeholder="Password" required/>
                             </div>
-                            <div className={styles.pass_link}><a href="#">Forgot Password?</a></div>
+                            <div className={styles.pass_link} onClick={() => navigate('/ResetPassword')}><a href="">Forgot Password?</a></div>
                             <div className={`${styles.field} ${styles.btn}`}>
                                 <div className={styles.btn_layer}></div>
                                 <input type="submit" value="Login"/>
