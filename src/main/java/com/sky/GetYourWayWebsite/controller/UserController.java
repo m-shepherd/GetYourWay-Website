@@ -27,8 +27,9 @@ public class UserController {
         return possibleUser.isPresent();
     }
 
-    @GetMapping("/users/getUserByEmail/{email}")
-    public HttpStatus checkUserPresentByEmail(@PathVariable String email){
+    @PostMapping("/users/getUserByEmail")
+    public HttpStatus checkUserPresentByEmail(@RequestBody User user){
+        String email = user.getEmail();
         if (userService.findByEmail(email).isPresent()){
             return HttpStatus.OK;
         } else {

@@ -43,10 +43,20 @@ const ResetPassword = () =>  {
     }
 
     function checkEmailIsValid(email){
+        const userObject = {
+            "username" : "placeholder",
+            "firstName" : "placeholder",
+            "lastName" : "placeholder",
+            "email" : email,
+            "password" : "placeholder"
+        }
+        console.log(userObject);
+        const userJSON = JSON.stringify(userObject);
+        //const userData = JSON.parse(userJSON);
         const xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://localhost:8080/users/getUserByEmail/" + email);
+        xhr.open("POST", "http://localhost:8080/users/getUserByEmail", true);
         xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send();
+        xhr.send(userJSON);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4)  {
                 const serverResponse = xhr.responseText;
