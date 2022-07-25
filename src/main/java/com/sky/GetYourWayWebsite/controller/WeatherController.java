@@ -1,5 +1,12 @@
 package com.sky.GetYourWayWebsite.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.sky.GetYourWayWebsite.service.WeatherService;
+import org.apache.coyote.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,66 +16,47 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class WeatherController {
-    private final String WEATHER_API_ADDRESS = "https://api.openweathermap.org/data/2.5/onecall?";
-    private final String WEATHER_API_KEY = "b4057c94ecd30c1ccb944addfb79d2bc";
+    @Autowired
+    private WeatherService weatherService;
+
+    private ResponseEntity<Object> getDataForEndpoint(String endpointName, String lat, String lon) {
+        try {
+            double latitude = Double.parseDouble(lat);
+            double longitude = Double.parseDouble(lon);
+            Object result;
+
+            switch(endpointName) {
+                case "currentWeather": result = weatherService.getCurrentWeather(latitude, longitude); break;
+                case "hourlyWeather": result = weatherService.getHourlyWeather(latitude, longitude); break;
+                case "dailyWeather": result = weatherService.getDailyWeather(latitude, longitude); break;
+                default: result = new Object();
+            }
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (NumberFormatException e) {
+            ObjectMapper mapper = new ObjectMapper();
+            ObjectNode errorObject = mapper.createObjectNode();
+            errorObject.put("error", "Longitude and latitude parameters must be valid numbers");
+            return new ResponseEntity<>(errorObject, HttpStatus.PRECONDITION_FAILED);
+        }
+    }
 
     @GetMapping("/currentWeather")
-    public Object getCurrentWeather(@RequestParam String lat, @RequestParam String lon) {
-        System.out.println("currentWeather");
-        String uri = WEATHER_API_ADDRESS + "lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,daily,alerts" +
-                "&units=metric&appid=" + WEATHER_API_KEY;
-
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(uri, Object.class);
+    public ResponseEntity<Object> getCurrentWeather(@RequestParam String lat, @RequestParam String lon) {
+        return getDataForEndpoint("currentWeather", lat, lon);
     }
 
     @GetMapping("/hourlyWeather")
     public Object getHourlyWeather(@RequestParam String lat, @RequestParam String lon) {
-        String uri = WEATHER_API_ADDRESS + "lat=" + lat + "&lon=" + lon + "&exclude=minutely,current,daily,alerts" +
-                "&units=metric&appid=" + WEATHER_API_KEY;
-
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(uri, Object.class);
+        return getDataForEndpoint("hourlyWeather", lat, lon);
     }
 
     @GetMapping("/dailyWeather")
     public Object getDailyWeather(@RequestParam String lat, @RequestParam String lon) {
-        String uri = WEATHER_API_ADDRESS + "lat=" + lat + "&lon=" + lon + "&exclude=minutely,current,hourly,alerts" +
-                "&units=metric&appid=" + WEATHER_API_KEY;
-
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(uri, Object.class);
-    }
-
-    @GetMapping("/weatherAlerts")
-    public Object getWeatherAlerts(@RequestParam String lat, @RequestParam String lon) {
-        String uri = WEATHER_API_ADDRESS + "lat=" + lat + "&lon=" + lon + "&exclude=minutely,current,hourly,daily" +
-                "&units=metric&appid=" + WEATHER_API_KEY;
-
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(uri, Object.class);
+        return getDataForEndpoint("dailyWeather", lat, lon);
     }
 
     @GetMapping("/getWeatherSymbolURL")
     public String getWeatherSymbolURL(@RequestParam String description) {
-        String fileName = "";
-
-        if (description.contains("clear")) {
-            fileName = "01d";
-        } else if (description.contains("clouds")) {
-            fileName = "02d";
-        } else if (description.contains("rain")) {
-            fileName = "09d";
-        } else if (description.contains("thunderstorm")) {
-            fileName = "11d";
-        } else if (description.contains("snow")) {
-            fileName = "13d";
-        } else if (description.contains("mist")) {
-            fileName = "50d";
-        } else {
-            fileName = "01d";
-        }
-
-        return  "https://openweathermap.org/img/wn/" + fileName + "@2x.png";
+        return weatherService.getWeatherSymbolURL(description);
     }
 }
