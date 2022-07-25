@@ -68,18 +68,18 @@ const LoginAndSignUp = () => {
 
             if (!validUsername && username.value.length > 32) {
                 error.style.display = "block";
-                error.innerHTML = "Username Has To Be Shorter Than 32 Characters";
+                error.innerHTML = "Has To Be Shorter Than 32 Characters";
                 document.getElementById("username").classList.add("incorrect");
             } else if (!validUsername && username.value.length < 8) {
                 error.style.display = "block";
-                error.innerHTML = "Username Has To Be Longer Than 8 Characters";
+                error.innerHTML = "Has To Be Longer Than 8 Characters";
                 document.getElementById("username").classList.add("incorrect");
             } else if (!validUsername) {
                 error.style.display = "block";
                 if (!username.value.charAt(0).match(/[a-z]/i)) {
-                    error.innerHTML = "Username Has To Start With A Letter";
+                    error.innerHTML = "Has To Start With A Letter";
                 } else {
-                    error.innerHTML = "Username Can Only Contain Letters, Underscores And Dashes";
+                    error.innerHTML = "Can Only Contain Letters, Underscores And Dashes";
                 }
                 document.getElementById("username").classList.add("incorrect");
             } else {
@@ -103,15 +103,15 @@ const LoginAndSignUp = () => {
 
             if (!validFirstName && firstName.value.length > 16) {
                 error.style.display = "block";
-                error.innerHTML = "First Name Has To Be Shorter Than 16 Characters";
+                error.innerHTML = "Has To Be Shorter Than 16 Characters";
                 document.getElementById("firstName").classList.add("incorrect");
             } else if (!validFirstName && firstName.value.length <= 1) {
                 error.style.display = "block";
-                error.innerHTML = "First Name Has To Be Longer Than 1 Characters";
+                error.innerHTML = "Has To Be Longer Than 1 Characters";
                 document.getElementById("firstName").classList.add("incorrect");
             } else if (!validFirstName) {
                 error.style.display = "block";
-                error.innerHTML = "First Name Can Only Contain Letters";
+                error.innerHTML = "Can Only Contain Letters";
                 document.getElementById("firstName").classList.add("incorrect");
             } else {
                 error.style.display = "none";
@@ -134,15 +134,15 @@ const LoginAndSignUp = () => {
 
             if (!validLastName && lastName.value.length >= 15) {
                 error.style.display = "block";
-                error.innerHTML = "Last Name Has To Be Shorter Than 16 Characters";
+                error.innerHTML = "Has To Be Shorter Than 16 Characters";
                 document.getElementById("lastName").classList.add("incorrect");
             } else if (!validLastName&& lastName.value.length <= 1) {
                 error.style.display = "block";
-                error.innerHTML = "Last Name Has To Be Shorter Than 16 Characters";
+                error.innerHTML = "Has To Be Longer Than 16 Characters";
                 document.getElementById("lastName").classList.add("incorrect");
             } else if (!validLastName) {
                 error.style.display = "block";
-                error.innerHTML = "First Name Can Only Contain Letters";
+                error.innerHTML = "Can Only Contain Letters";
                 document.getElementById("lastName").classList.add("incorrect");
             } else {
                 error.style.display = "none";
@@ -163,7 +163,7 @@ const LoginAndSignUp = () => {
         } else {
             if (!validEmail) {
                 error.style.display = "block";
-                error.innerHTML = "Email Must Follow The Format name@address.xyz"
+                error.innerHTML = "Must Follow The Format name@address.xyz"
                 document.getElementById("email").classList.add("incorrect");
             } else {
                 error.style.display = "none";
@@ -185,13 +185,13 @@ const LoginAndSignUp = () => {
         } else {
             if (!validPassword && password.value.length > 32) {
                 error.style.display = "block";
-                error.innerHTML = "Password Has To Be Shorter Than 32 Characters";
+                error.innerHTML = "Has To Be Shorter Than 32 Characters";
             } else if (!validPassword && password.value.length < 8) {
                 error.style.display = "block";
-                error.innerHTML = "First Name Has To Be Longer Than 8 Characters";
+                error.innerHTML = "Has To Be Longer Than 8 Characters";
             } else if (!validPassword) {
                 error.style.display = "block";
-                error.innerHTML = "Password Must Contain At Least 1 Letter And 1 Number"
+                error.innerHTML = "Must Contain At Least 1 Letter And 1 Number"
                 document.getElementById("password").classList.add("incorrect");
             } else {
                 error.style.display = "none";

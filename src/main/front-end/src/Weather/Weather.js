@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import axios from 'axios';
-import './Weather.css';
+import './Weather.module.css';
 
 const testLatitude = -48.188305;
 const testLongitude = -67.674405;
@@ -13,13 +13,11 @@ const Weather = () => {
 
     useEffect(() => {
         const parseResponseData = (response) => {
-            const parsedObject = {
+            return {
                 temp: Math.round(response['temp']),
                 symbol: response['weather'][0]['main'],
                 description: response['weather'][0]['description']
-            }
-
-            return parsedObject;
+            };
         };
 
         axios.get(serverAddress + '/currentWeather?lat=' + testLatitude + '&lon=' + testLongitude).then(response => {
