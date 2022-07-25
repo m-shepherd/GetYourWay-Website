@@ -17,7 +17,7 @@ const Weather = () => {
             return {
                 temp: Math.round(response['temp']),
                 symbol: response['weather'][0]['main'],
-                description: response['weather'][0]['description']
+                description: capitalizeDescription(response['weather'][0]['description'])
             };
         };
 
@@ -58,7 +58,7 @@ const Weather = () => {
                         </div>
                         <div className={weatherStyle.informationBlock}>
                             <img src={weatherSymbolURL} alt="Weather" className={weatherStyle.temperature}/>
-                            {/*<p className="smallInformationText">{capitalizeDescription(currentWeather.description)}</p>*/}
+                            <p className="smallInformationText">{currentWeather.description}</p>
                         </div>
                     </div>
                 </div>
