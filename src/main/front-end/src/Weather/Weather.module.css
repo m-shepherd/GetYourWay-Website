@@ -3,9 +3,9 @@
 }
 
 .weatherContainer {
-    width: 25%;
+    width: 100%;
     height: var(--weather-height);
-    background-color: lightgray;
+    /*background-color: lightgray;*/
     border-radius: 30px;
     display: flex;
     justify-content: space-around;
@@ -31,4 +31,17 @@
 
 .largeInformationText {
     font-size: 1.5em;
+}
+.wrapper{
+    overflow: hidden;
+    width: 25em;
+    max-width: 65em;
+    background: #fff;
+    padding: 30px;
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
+}
+.padding{
+    padding-bottom: 1.5em;
 }

@@ -1,9 +1,9 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios';
-import './Weather.module.css';
+import weatherStyle from'./Weather.module.css';
 
-const testLatitude = -48.188305;
-const testLongitude = -67.674405;
+const testLatitude = 53.8008;
+const testLongitude = 1.5491;
 
 const serverAddress = 'http://localhost:8080';
 
@@ -13,6 +13,7 @@ const Weather = () => {
 
     useEffect(() => {
         const parseResponseData = (response) => {
+            console.log(response);
             return {
                 temp: Math.round(response['temp']),
                 symbol: response['weather'][0]['main'],
@@ -21,6 +22,7 @@ const Weather = () => {
         };
 
         axios.get(serverAddress + '/currentWeather?lat=' + testLatitude + '&lon=' + testLongitude).then(response => {
+            console.log(response);
             setCurrentWeather(parseResponseData(response.data.current));
         }).catch(error => {
             console.log('Could not fetch weather data');
@@ -45,16 +47,24 @@ const Weather = () => {
     }
 
 
-    return (<div className="weatherContainer">
-        <div className="informationBlock">
-            <p className="largeInformationText">Location</p>
-            <h2 className="temperature">{currentWeather.temp}&#176;C</h2>
+    return (
+        <div>
+            <div className={weatherStyle.padding}>
+                <div className={weatherStyle.wrapper}>
+                    <div className={weatherStyle.weatherContainer}>
+                        <div className={weatherStyle.informationBlock}>
+                            <p id="location" className={weatherStyle.largeInformationText}>Location</p>
+                            <h2 id="temperature" className={weatherStyle.temperature}>{currentWeather.temp}&#176;C</h2>
+                        </div>
+                        <div className={weatherStyle.informationBlock}>
+                            <img src={weatherSymbolURL} alt="Weather" className={weatherStyle.temperature}/>
+                            {/*<p className="smallInformationText">{capitalizeDescription(currentWeather.description)}</p>*/}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div className="informationBlock">
-            <img src={weatherSymbolURL} alt="Weather" className="temperature" />
-            <p className="smallInformationText">{capitalizeDescription(currentWeather.description)}</p>
-        </div>
-    </div>)
+    )
 };
 
 export default Weather;
