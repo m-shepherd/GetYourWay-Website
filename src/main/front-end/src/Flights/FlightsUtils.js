@@ -1,7 +1,7 @@
 export function getFlights(event) {
     event.preventDefault();
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:8080/flights/2022-07-13&LHR&FRA", true);
+    xhr.open("GET", "http://localhost:8080/flights?date=2022-07-13&dep=LHR&arr=FRA", true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4)  {
