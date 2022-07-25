@@ -6,7 +6,6 @@ export function getFlights(event) {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4)  {
             const flights = JSON.parse(xhr.responseText);
-            console.log(flights);
             const flightTable = document.querySelector("#flightTable");
             const flightData = document.querySelector("#flightData");
             const dataTitle = document.querySelector("#dataTitle");
@@ -14,8 +13,7 @@ export function getFlights(event) {
             dataTitle.style.display = "block";
             for(const flight in flights) {
                 const row = flightTable.insertRow(-1)
-                // row.setAttribute('data-href', '#');
-                // // row.setAttribute('onClick', '{clicked}');
+                row.setAttribute('data-href', '#');
                 let i = 0;
                 for (const key in flights[flight]) {
                     if (i !== 0) {
@@ -31,7 +29,33 @@ export function getFlights(event) {
     xhr.send();
 }
 
-export function makeRowsClickable() {
+export function confirmFlights() {
+    const clickedItems = document.getElementsByClassName('clicked');
+    if (clickedItems.length === 1) {
+        const flightData = [];
+        const selectedFlights = clickedItems[0];
+        selectedFlights.childNodes.forEach(
+            function(detail) {
+                flightData.push(detail.textContent);
+            });
+        const jsonFields = ['departure_airport', 'departure_time', 'arrival_airport',
+            'arrival_time', 'airline_name', 'flight_number']
+
+        let jsonData = "{";
+        for (let i = 0; i <flightData.length; i++) {
+            if (i === flightData.length - 1) {
+                jsonData += '"' + jsonFields[i] + '": "' + flightData[i] + '"';
+            } else {
+                jsonData += '"' + jsonFields[i] + '": "' + flightData[i] + '",';
+            }
+        }
+        jsonData += '}';
+
+        console.log(JSON.stringify(jsonData));
+    }
+}
+
+function makeRowsClickable() {
     const table = document.getElementById("table");
     const rows = table.getElementsByTagName("tr");
     for (let i = 0; i < rows.length; i++) {
@@ -55,7 +79,7 @@ export function makeRowsClickable() {
     }
 }
 
-export function showConfirmButton() {
+function showConfirmButton() {
     let clicked = false;
     const clickedItems = document.getElementsByClassName('clicked');
     for (let i = 0; i < clickedItems.length; i++) {

@@ -1,6 +1,6 @@
 import flightStyles from'./Flights.module.css';
 import './Flights.css'
-import {getFlights} from "./FlightsUtils";
+import {getFlights, confirmFlights} from "./FlightsUtils";
 
 const Flights = () => {
     return (
@@ -48,7 +48,7 @@ const Flights = () => {
                     </div>
                     <div id="destination" className={`${flightStyles.field} ${flightStyles.btn}`} style={{display: "none"}}>
                         <div className={flightStyles.btn_layer}></div>
-                        <input id="confirm" type="submit" value="Confirm Flight"/>
+                        <input id="confirm" type="submit" onClick={confirmFlights} value="Confirm Flight"/>
                     </div>
                 </div>
             </div>
