@@ -4,10 +4,7 @@ import com.sky.GetYourWayWebsite.flights.Flight;
 import com.sky.GetYourWayWebsite.flights.FlightQuery;
 import com.sky.GetYourWayWebsite.flights.FlightUtils;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -27,10 +24,10 @@ import java.util.List;
 public class FlightController {
     private final String API_ADDRESS = "https://app.goflightlabs.com/flights";
     private final String API_KEY = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMTA0NTdmZDU1YTM4NjA3OWE0YjA3ZjIzMjVhZTJiMjRlYzA1M2MzMGE3ODJkZTFjMjY3ZmEwZmExMzBjYjBkMzQ1MTViMjVhMDIzMmY0NDAiLCJpYXQiOjE2NTg0MTI0NTksIm5iZiI6MTY1ODQxMjQ1OSwiZXhwIjoxNjg5OTQ4NDU5LCJzdWIiOiI5MDA0Iiwic2NvcGVzIjpbXX0.efxsoJCpmQQDhxvdAj2Kc4LnZ1paHKoji4jm9x6ikMr2Ile1lsBkMjvj0XuMxMSqNh8GSQdOUwHIKG-X0Q5JJQ";
-    @GetMapping("/flights/{date}&{departureAirport}&{arrivalAirport}")
-    public List<Flight> getFlights(@PathVariable String date, @PathVariable String departureAirport, @PathVariable String arrivalAirport) {
+    @GetMapping("/flights")
+    public List<Flight> getFlights(@RequestParam String date, @RequestParam String dep, @RequestParam String arr) {
         try {
-            FlightQuery query = new FlightQuery(date, departureAirport, arrivalAirport);
+            FlightQuery query = new FlightQuery(date, dep, arr);
             String uri = API_ADDRESS + "?access_key=" + API_KEY + query.getSearchParameters();
 
             RestTemplate restTemplate = new RestTemplate();

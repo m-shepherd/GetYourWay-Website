@@ -24,9 +24,14 @@ const LoginAndSignUp = () => {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4)  {
                 const serverResponse = xhr.responseText;
+                const loginError = document.querySelector("#loginError");
                 if (serverResponse === '"OK"') {
-                    navigate('/MainPage')
-                 }
+                    loginError.style.display = 'none';
+                    navigate('/MainPage');
+                 } else {
+                    loginError.style.display = "block";
+                    loginError.innerHTML = "Invalid Login Details";
+                }
             }
         };
         xhr.send();
@@ -224,6 +229,9 @@ const LoginAndSignUp = () => {
     }
 
     function switchToSignUp() {
+        const loginError = document.querySelector("#loginError");
+        loginError.style.display = 'none';
+
         const loginText = document.querySelector("#loginText");
         const loginForm = document.querySelector("#loginForm");
         loginForm.style.marginLeft = "-50%";
@@ -263,6 +271,7 @@ const LoginAndSignUp = () => {
                                onClick={switchToSignUp}>Sign Up</label>
                         <div id="sliderTab" className={styles.slider_tab}></div>
                     </div>
+                    <div id="loginError" className={styles.error} style={{display: "none"}}></div>
                     <div className={styles.form_inner}>
                         <form id="loginForm" onSubmit={loginSubmit} method="post" action="localhost:8080/users">
                             <div className={styles.field}>
