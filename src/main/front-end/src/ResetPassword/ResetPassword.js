@@ -31,7 +31,7 @@ const ResetPassword = () =>  {
     function sendEmail(email){
             const emailSettings = {
                 "recipient": email,
-                "msgBody": "Success",
+                "msgBody": "http://localhost:8080/users",
                 "subject": "Test email"
             }
 
