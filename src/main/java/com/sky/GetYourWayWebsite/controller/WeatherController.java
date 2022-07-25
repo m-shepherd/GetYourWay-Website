@@ -14,6 +14,7 @@ public class WeatherController {
 
     @GetMapping("/currentWeather")
     public Object getCurrentWeather(@RequestParam String lat, @RequestParam String lon) {
+        System.out.println("currentWeather");
         String uri = WEATHER_API_ADDRESS + "lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,daily,alerts" +
                 "&units=metric&appid=" + WEATHER_API_KEY;
 

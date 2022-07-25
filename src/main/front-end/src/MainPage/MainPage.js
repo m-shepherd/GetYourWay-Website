@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import mainStyles from'./MainPage.module.css';
 import './MainPage.css';
+import Weather from '../Weather/Weather'
 import Flights from '../Flights/Flights'
 
 const MainPage = () => {
@@ -19,6 +20,7 @@ const MainPage = () => {
                 </div>
             </div>
 
+            <Weather/>
             <Flights/>
             
         </div>
