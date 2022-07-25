@@ -4,6 +4,7 @@ import './MainPage.css';
 import flightStyles from "../Flights/Flights.module.css";
 import '../Flights/Flights.css';
 import {getFlights} from '../Flights/Flights';
+import Weather from '../Weather/Weather';
 
 const MainPage = () => {
 
@@ -69,6 +70,7 @@ const MainPage = () => {
                 </div>
             </div>
 
+            <Weather />
             
         </div>
     )

@@ -2,14 +2,20 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Weather.css';
 
-const testLatitude = -48.188305;
-const testLongitude = -67.674405;
+const testStartingLatitude = -48.188305;
+const testStartingLongitude = -67.674405;
+
+const testDestinationLatitude = 51.5085;
+const testDestinationLongitude = -0.1257;
 
 const serverAddress = 'http://localhost:8080';
 
 const Weather = () => {
-    const [currentWeather, setCurrentWeather] = useState({});
-    const [weatherSymbolURL, setWeatherSymbolURL] = useState('');
+    const [startingLocationWeather, setStartingLocationWeather] = useState({});
+    const [destinationLocationWeather, setDestinationLocationWeather] = useState({});
+
+    const [startingLocationWeatherSymbolURL, setStartingLocationWeatherSymbolURL] = useState('');
+    const [destinationLocationWeatherSymbolURL, setDestinationLocationWeatherSymbolURL] = useState('');
 
     useEffect(() => {
         const parseResponseData = (response) => {
@@ -22,39 +28,53 @@ const Weather = () => {
             return parsedObject;
         };
 
-        axios.get(serverAddress + '/currentWeather?lat=' + testLatitude + '&lon=' + testLongitude).then(response => {
-            setCurrentWeather(parseResponseData(response.data.current));
-        }).catch(error => {
-            console.log('Could not fetch weather data');
-            console.error(error);
-        });
+        const getCurrentWeatherAtLocation = (latitude, longitude, weatherSetter) => {
+            axios.get(serverAddress + '/currentWeather?lat=' + latitude + '&lon=' + longitude).then(response => {
+                weatherSetter(parseResponseData(response.data.current));
+            }).catch(error => {
+                console.log('Could not fetch weather data');
+                console.error(error);
+            });
+        }
+
+        getCurrentWeatherAtLocation(testStartingLatitude, testStartingLongitude, setStartingLocationWeather);
+        getCurrentWeatherAtLocation(testDestinationLatitude, testDestinationLongitude, setDestinationLocationWeather);
     }, []);
 
     useEffect(() => {
-        const requestWeatherSymbol = () => {
-            axios.get(serverAddress + '/getWeatherSymbolURL?description=' + currentWeather.description).then(response => {
-                setWeatherSymbolURL(response.data);
+        const getCurrentWeatherSymbol = (description, urlSetter) => {
+            axios.get(serverAddress + '/getWeatherSymbolURL?description=' + description).then(response => {
+                urlSetter(response.data);
             }).catch(error => {
                 console.log('Could not fetch current weather symbol');
+                return '';
             });
         };
 
-        requestWeatherSymbol();
-    }, [currentWeather]);
+        getCurrentWeatherSymbol(startingLocationWeather.description, setStartingLocationWeatherSymbolURL);
+        getCurrentWeatherSymbol(destinationLocationWeather.description, setDestinationLocationWeatherSymbolURL);
+    }, [startingLocationWeather, destinationLocationWeather]);
 
     const capitalizeDescription = (description) => {
-        return description[0].toUpperCase() + description.substring(1);
+        if (description) {
+            return description[0].toUpperCase() + description.substring(1);
+        }
+        return '';
     }
 
 
     return (<div className="weatherContainer">
         <div className="informationBlock">
-            <p className="largeInformationText">Location</p>
-            <h2 className="temperature">{currentWeather.temp}&#176;C</h2>
+            <p className="largeInformationText">Starting Location</p>
+            <h2 className="temperature">{startingLocationWeather.temp}&#176;C</h2>
+            <div className="imageContainer"><img src={startingLocationWeatherSymbolURL} alt="Weather" className="temperature weatherIcon" /></div>
+            <p className="smallInformationText">{capitalizeDescription(startingLocationWeather.description)}</p>
         </div>
         <div className="informationBlock">
-            <img src={weatherSymbolURL} alt="Weather" className="temperature" />
-            <p className="smallInformationText">{capitalizeDescription(currentWeather.description)}</p>
+        <p className="largeInformationText">Destination Location</p>
+            <h2 className="temperature">{destinationLocationWeather.temp}&#176;C</h2>
+            <div className="imageContainer"><img src={destinationLocationWeatherSymbolURL} alt="Weather" className="temperature weatherIcon" /></div>
+            <p className="smallInformationText">{capitalizeDescription(destinationLocationWeather.description)}</p>
         </div>
     </div>)
 };

@@ -3,9 +3,11 @@
 }
 
 .weatherContainer {
-    width: 25%;
+    width: 65em;
+    max-width: 65em;
     height: var(--weather-height);
-    background-color: lightgray;
+    background-color: white;
+    padding: 30px;
     border-radius: 30px;
     display: flex;
     justify-content: space-around;
@@ -23,6 +25,16 @@
     font-size: 3em;
     margin-top: -15px;
     margin-bottom: -15px;
+}
+
+.weatherIcon {
+    width: 2em;
+    height: 2em;    
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: center;
 }
 
 .smallInformationText {
