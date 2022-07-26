@@ -13,7 +13,6 @@ const Weather = () => {
 
     useEffect(() => {
         const parseResponseData = (response) => {
-            console.log(response);
             return {
                 temp: Math.round(response['temp']),
                 symbol: response['weather'][0]['main'],
