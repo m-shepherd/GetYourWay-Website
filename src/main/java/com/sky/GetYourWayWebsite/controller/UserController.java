@@ -1,6 +1,6 @@
 package com.sky.GetYourWayWebsite.controller;
 
-import com.sky.GetYourWayWebsite.domain.dto.User;
+import com.sky.GetYourWayWebsite.domain.dto.Users;
 import com.sky.GetYourWayWebsite.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +18,16 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/users")
-    public List<User> getUsers() {
+    public List<Users> getUsers() {
         return userService.getAllUsers();
     }
 
 
     @GetMapping("/users/{username}")
-    public User getOneUser(@PathVariable String username){
-        Optional<User> optionalUser = userService.findByUsername(username);
+    public Users getOneUser(@PathVariable String username){
+        Optional<Users> optionalUser = userService.findByUsername(username);
         if (optionalUser.isPresent()){
-            User returnedUser = optionalUser.get();
-            return returnedUser;
+            return optionalUser.get();
         } else {
             throw new ResponseStatusException(
                     HttpStatus.NO_CONTENT, "Could not find owner"
@@ -37,13 +36,12 @@ public class UserController {
     }
 
     private boolean isUserPresent(String username) {
-        Optional<User> possibleUser = userService.findByUsername(username);
+        Optional<Users> possibleUser = userService.findByUsername(username);
         return possibleUser.isPresent();
     }
 
-    @PostMapping("/users/getUserByEmail")
-    public HttpStatus checkUserPresentByEmail(@RequestBody User user){
-        String email = user.getEmail();
+    @GetMapping("/users/getUserByEmail")
+    public HttpStatus checkUserPresentByEmail(@RequestParam String email){
         if (userService.findByEmail(email).isPresent()){
             return HttpStatus.OK;
         } else {
@@ -52,7 +50,7 @@ public class UserController {
     }
     
     @PostMapping("/users")
-    public HttpStatus createUser(@RequestBody User newUser) {
+    public HttpStatus createUser(@RequestBody Users newUser) {
         if (!isUserPresent(newUser.getUsername())) {
             return editUserDetails(newUser);
         } else {
@@ -61,7 +59,7 @@ public class UserController {
     }
 
     @PutMapping("/users")
-    public HttpStatus updateUser(@RequestBody User newUser) {
+    public HttpStatus updateUser(@RequestBody Users newUser) {
         if (isUserPresent(newUser.getUsername())) {
             return editUserDetails(newUser);
         } else {
@@ -69,8 +67,8 @@ public class UserController {
         }
     }
 
-    private HttpStatus editUserDetails(@RequestBody User newUser) {
-        User result;
+    private HttpStatus editUserDetails(@RequestBody Users newUser) {
+        Users result;
         try {
             result = userService.addUser(newUser);
         } catch (Exception e) {
@@ -85,8 +83,8 @@ public class UserController {
 
     @PostMapping("/users/{username}/{password}")
     public HttpStatus login(@PathVariable String username, @PathVariable String password) {
-        Optional<User> possibleUser = userService.findByUsername(username);
-        User user = null;
+        Optional<Users> possibleUser = userService.findByUsername(username);
+        Users user = null;
         if (possibleUser.isPresent()) {
             user = possibleUser.get();
         }

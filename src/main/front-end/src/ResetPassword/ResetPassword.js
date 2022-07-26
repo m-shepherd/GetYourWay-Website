@@ -44,20 +44,20 @@ const ResetPassword = () =>  {
     }
 
     function checkEmailIsValid(email){
-        const userObject = {
-            "username" : "placeholder",
-            "firstName" : "placeholder",
-            "lastName" : "placeholder",
-            "email" : email,
-            "password" : "placeholder"
-        }
-        console.log(userObject);
-        const userJSON = JSON.stringify(userObject);
+        // const userObject = {
+        //     "username" : "placeholder",
+        //     "firstName" : "placeholder",
+        //     "lastName" : "placeholder",
+        //     "email" : email,
+        //     "password" : "placeholder"
+        // }
+        // console.log(userObject);
+        // const userJSON = JSON.stringify(userObject);
         //const userData = JSON.parse(userJSON);
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:8080/users/getUserByEmail", true);
+        xhr.open("GET", "http://localhost:8080/users/getUserByEmail?email=" + email, true);
         xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(userJSON);
+        xhr.send();
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4)  {
                 const serverResponse = xhr.responseText;
@@ -73,14 +73,16 @@ const ResetPassword = () =>  {
     function submitEmail(event) {
         event.preventDefault();
 
-        const data = new FormData(event.target);
+        // const data = new FormData(event.target);
 
-        const object = {};
-        data.forEach((value, key) => object[key] = value);
-        const json = JSON.stringify(object);
-        const jsonData = JSON.parse(json);
+        // const object = {};
+        // data.forEach((value, key) => object[key] = value);
+        // const json = JSON.stringify(object);
+        // const jsonData = JSON.parse(json);
 
-        checkEmailIsValid(jsonData.email);
+        const email = document.querySelector('#email').value;
+
+        checkEmailIsValid(email);
     }
 
 

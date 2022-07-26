@@ -26,7 +26,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Autowired private JavaMailSender javaMailSender;
 
-    @Value("${spring.mail.username}") private String sender;
+//    @Value("${spring.mail.username}") private String sender;
 
     // Method 1
     // To send a simple email
@@ -41,7 +41,7 @@ public class EmailServiceImpl implements EmailService {
                     = new SimpleMailMessage();
 
             // Setting up necessary details
-            mailMessage.setFrom(sender);
+//            mailMessage.setFrom(sender);
             mailMessage.setTo(details.getRecipient());
             mailMessage.setText(details.getMsgBody());
             mailMessage.setSubject(details.getSubject());
@@ -73,7 +73,7 @@ public class EmailServiceImpl implements EmailService {
             // be send
             mimeMessageHelper
                     = new MimeMessageHelper(mimeMessage, true);
-            mimeMessageHelper.setFrom(sender);
+//            mimeMessageHelper.setFrom(sender);
             mimeMessageHelper.setTo(details.getRecipient());
             mimeMessageHelper.setText(details.getMsgBody());
             mimeMessageHelper.setSubject(
