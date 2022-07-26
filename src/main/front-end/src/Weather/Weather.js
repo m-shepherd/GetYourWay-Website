@@ -20,7 +20,11 @@ const Weather = () => {
             };
         };
 
-        axios.get(serverAddress + '/currentWeather?lat=' + testLatitude + '&lon=' + testLongitude).then(response => {
+        axios.get(serverAddress + '/currentWeather?lat=' + testLatitude + '&lon=' + testLongitude, {
+            headers: {
+                'Authorization': `Basic RGFuQzpwYXNzd29yZA==`
+            }
+        }).then(response => {
             setCurrentWeather(parseResponseData(response.data.current));
         }).catch(error => {
             console.log('Could not fetch weather data');
@@ -30,7 +34,11 @@ const Weather = () => {
 
     useEffect(() => {
         const requestWeatherSymbol = () => {
-            axios.get(serverAddress + '/getWeatherSymbolURL?description=' + currentWeather.description).then(response => {
+            axios.get(serverAddress + '/getWeatherSymbolURL?description=' + currentWeather.description, {
+                headers: {
+                    'Authorization': `Basic RGFuQzpwYXNzd29yZA==`
+                }
+            }).then(response => {
                 setWeatherSymbolURL(response.data);
             }).catch(error => {
                 console.log('Could not fetch current weather symbol');

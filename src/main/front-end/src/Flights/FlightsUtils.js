@@ -3,6 +3,7 @@ export function getFlights(event) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "http://localhost:8080/flights?date=2022-07-13&dep=LHR&arr=FRA", true);
     xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", "Basic " + btoa( "DanC:password"));
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4)  {
             const serverResponse = xhr.responseText;
