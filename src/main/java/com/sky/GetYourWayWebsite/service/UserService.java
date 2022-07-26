@@ -1,7 +1,7 @@
 package com.sky.GetYourWayWebsite.service;
 
 import com.sky.GetYourWayWebsite.domain.dao.UserRepository;
-import com.sky.GetYourWayWebsite.domain.dto.User;
+import com.sky.GetYourWayWebsite.domain.dto.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +13,11 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public List<User> getAllUsers(){
+    public List<Users> getAllUsers(){
         return userRepository.findAll();
     }
 
-    public User addUser(User user) {
+    public Users addUser(Users user) {
         if (!user.getUsername().equals("") && !user.getFirstName().equals("") &&
                 !user.getLastName().equals("") &&
                 !user.getEmail().equals("") && !user.getPassword() .equals("")) {
@@ -27,8 +27,12 @@ public class UserService {
         }
     }
 
-    public Optional<User> findByUsername(String username) {
+    public Optional<Users> findByUsername(String username) {
         return userRepository.findUserByUsername(username);
+    }
+
+    public Optional<Users> findByEmail(String email){
+        return userRepository.findUserByEmail(email);
     }
 
 }

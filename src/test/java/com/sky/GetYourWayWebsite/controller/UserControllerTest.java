@@ -1,8 +1,7 @@
 package com.sky.GetYourWayWebsite.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sky.GetYourWayWebsite.domain.dto.User;
+import com.sky.GetYourWayWebsite.domain.dto.Users;
 import com.sky.GetYourWayWebsite.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,17 +41,17 @@ public class UserControllerTest {
 
     @Test
     public void testGetAllUsers() throws Exception {
-        List<User> users = new ArrayList<>();
-        User u1 = new User();
+        List<Users> users = new ArrayList<>();
+        Users u1 = new Users();
         u1.setUsername("Miles");
         users.add(u1);
-        User u2 = new User();
+        Users u2 = new Users();
         u2.setUsername("Michael");
         users.add(u2);
-        User u3 = new User();
+        Users u3 = new Users();
         u3.setUsername("Akash");
         users.add(u3);
-        User u4 = new User();
+        Users u4 = new Users();
         u4.setUsername("Dan");
         users.add(u4);
 
@@ -69,14 +68,14 @@ public class UserControllerTest {
 
     @Test
     public void testAddNewUser() throws Exception {
-        User u1 = new User();
+        Users u1 = new Users();
         u1.setUsername("MickyShepShep");
         u1.setEmail("m@g.c");
         u1.setFirstName("Michael");
         u1.setLastName("Shepherd");
         u1.setPassword("password");
 
-        doReturn(new User()).when(userService).addUser(u1);
+        doReturn(new Users()).when(userService).addUser(u1);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
                 .post("/users")
@@ -92,7 +91,7 @@ public class UserControllerTest {
 
     @Test
     public void testGetUserByUsername() throws Exception{
-        User u1 = new User();
+        Users u1 = new Users();
         u1.setUsername("MickyShepShep");
         u1.setEmail("m@g.c");
         u1.setFirstName("Michael");
