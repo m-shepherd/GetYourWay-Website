@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 // Annotation
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-// Class
 public class EmailController {
     @Autowired private EmailService emailService;
 
