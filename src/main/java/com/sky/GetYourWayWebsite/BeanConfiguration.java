@@ -15,9 +15,4 @@ public class BeanConfiguration {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public CustomSuccessHandler successHandler() {
-        return new CustomSuccessHandler();
-    }
-
 }
