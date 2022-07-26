@@ -22,6 +22,20 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+
+    @GetMapping("/users/{username}")
+    public User getOneUser(@PathVariable String username){
+        Optional<User> optionalUser = userService.findByUsername(username);
+        if (optionalUser.isPresent()){
+            User returnedUser = optionalUser.get();
+            return returnedUser;
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NO_CONTENT, "Could not find owner"
+            );
+        }
+    }
+
     private boolean isUserPresent(String username) {
         Optional<User> possibleUser = userService.findByUsername(username);
         return possibleUser.isPresent();
