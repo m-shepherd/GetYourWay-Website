@@ -1,4 +1,4 @@
-package com.sky.GetYourWayWebsite.email;
+package com.sky.GetYourWayWebsite.service;
 
 // Java Program to Illustrate Creation Of
 // Service implementation class
@@ -10,8 +10,9 @@ package com.sky.GetYourWayWebsite.email;
 import java.io.File;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+
+import com.sky.GetYourWayWebsite.email.EmailDetails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

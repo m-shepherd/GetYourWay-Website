@@ -1,10 +1,12 @@
-package com.sky.GetYourWayWebsite.email;
+package com.sky.GetYourWayWebsite.service;
 
 // Java Program to Illustrate Creation Of
 // Service Interface
 
 // Importing required classes
 //import EmailDetails;
+
+import com.sky.GetYourWayWebsite.email.EmailDetails;
 
 // Interface
 public interface EmailService {

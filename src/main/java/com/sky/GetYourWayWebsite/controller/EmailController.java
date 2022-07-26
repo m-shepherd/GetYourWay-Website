@@ -1,4 +1,4 @@
-package com.sky.GetYourWayWebsite.email;
+package com.sky.GetYourWayWebsite.controller;
 
 // Java Program to Create Rest Controller that
 // Defines various API for Sending Mail
@@ -6,6 +6,8 @@ package com.sky.GetYourWayWebsite.email;
 
 // Importing required classes
 
+import com.sky.GetYourWayWebsite.email.EmailDetails;
+import com.sky.GetYourWayWebsite.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
