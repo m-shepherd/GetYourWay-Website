@@ -2,6 +2,7 @@ package com.sky.GetYourWayWebsite.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sky.GetYourWayWebsite.domain.dto.Users;
+import com.sky.GetYourWayWebsite.service.UserDetailsServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -30,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class UserControllerTest {
 
     @MockBean
-    private UserService userService;
+    private UserDetailsServiceImpl userService;
 
     @Autowired
     private MockMvc mockMvc;
