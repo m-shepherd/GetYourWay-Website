@@ -21,7 +21,6 @@ const Weather = () => {
         };
 
         axios.get(serverAddress + '/currentWeather?lat=' + testLatitude + '&lon=' + testLongitude).then(response => {
-            console.log(response);
             setCurrentWeather(parseResponseData(response.data.current));
         }).catch(error => {
             console.log('Could not fetch weather data');
