@@ -21,6 +21,9 @@ public class UserService {
         if (!user.getUsername().equals("") && !user.getFirstName().equals("") &&
                 !user.getLastName().equals("") &&
                 !user.getEmail().equals("") && !user.getPassword() .equals("")) {
+            if (user.getRole() == null) {
+                user.setRole("USER");
+            }
             return userRepository.save(user);
         } else {
             return null;

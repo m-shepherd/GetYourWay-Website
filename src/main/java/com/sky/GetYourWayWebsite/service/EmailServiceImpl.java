@@ -13,6 +13,7 @@ import javax.mail.internet.MimeMessage;
 
 import com.sky.GetYourWayWebsite.email.EmailDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -27,7 +28,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Autowired private JavaMailSender javaMailSender;
 
-//    @Value("${spring.mail.username}") private String sender;
+    @Value("${spring.mail.username}") private String sender;
 
     // Method 1
     // To send a simple email
@@ -42,7 +43,7 @@ public class EmailServiceImpl implements EmailService {
                     = new SimpleMailMessage();
 
             // Setting up necessary details
-//            mailMessage.setFrom(sender);
+            mailMessage.setFrom(sender);
             mailMessage.setTo(details.getRecipient());
             mailMessage.setText(details.getMsgBody());
             mailMessage.setSubject(details.getSubject());
