@@ -22,7 +22,7 @@ public class UserServiceTest {
     UserRepository userRepository;
 
     @Autowired
-    UserService userService;
+    UserDetailsServiceImpl userService;
 
     @Test
     @DisplayName("Test get all users success")

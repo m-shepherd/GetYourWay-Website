@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Properties;
 
@@ -31,6 +32,16 @@ public class BeanConfiguration {
     @Bean
     public JavaMailSender javaMailSender() {
         return new JavaMailSenderImpl();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public CustomSuccessHandler successHandler() {
+        return new CustomSuccessHandler();
     }
 
 

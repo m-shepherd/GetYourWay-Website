@@ -1,8 +1,8 @@
 package com.sky.GetYourWayWebsite.controller;
 
 import com.sky.GetYourWayWebsite.domain.dto.Users;
-import com.sky.GetYourWayWebsite.service.UserService;
 
+import com.sky.GetYourWayWebsite.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
     @Autowired
-    UserService userService;
+    UserDetailsServiceImpl userService;
 
     @GetMapping("/users")
     public List<Users> getUsers() {
@@ -81,7 +81,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/users/{username}/{password}")
+    @GetMapping("/users/{username}/{password}")
     public HttpStatus login(@PathVariable String username, @PathVariable String password) {
         Optional<Users> possibleUser = userService.findByUsername(username);
         Users user = null;

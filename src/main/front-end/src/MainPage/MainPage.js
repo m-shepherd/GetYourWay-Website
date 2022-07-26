@@ -8,6 +8,11 @@ const MainPage = () => {
 
     let navigate = useNavigate();
 
+    function logOut() {
+        localStorage.removeItem('auth');
+        navigate('/')
+    }
+
     return (
         <div>
             <div className={mainStyles.padding}>
@@ -15,7 +20,7 @@ const MainPage = () => {
                     <div className={mainStyles.title_text}>
                         <div className={mainStyles.title}>Main Page</div>
                     </div>
-                    <div className={mainStyles.pass_link} onClick={() => navigate('/')}><a href="">Log Out</a></div>
+                    <div className={mainStyles.pass_link} onClick={logOut}><a href="">Log Out</a></div>
                     <div className={mainStyles.pass_link}><a href="#findFlights">Find Flights</a></div>
                 </div>
             </div>
