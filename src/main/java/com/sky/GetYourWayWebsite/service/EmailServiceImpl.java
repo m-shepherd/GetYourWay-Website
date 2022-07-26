@@ -55,7 +55,8 @@ public class EmailServiceImpl implements EmailService {
 
         // Catch block to handle the exceptions
         catch (Exception e) {
-            return "Error while Sending Mail";
+            System.out.println(e.getMessage());
+        return "Error while Sending Mail";
         }
     }
 

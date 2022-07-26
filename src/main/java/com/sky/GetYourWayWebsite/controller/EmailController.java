@@ -24,7 +24,6 @@ public class EmailController {
     // Sending a simple Email
     @PostMapping("/sendMail")
     public String sendMail(@RequestBody EmailDetails details) {
-        System.out.println(emailService.sendSimpleMail(details));
         return emailService.sendSimpleMail(details);
     }
 
