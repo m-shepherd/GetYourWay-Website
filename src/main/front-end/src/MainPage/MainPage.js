@@ -8,8 +8,6 @@ const MainPage = () => {
 
     let navigate = useNavigate();
 
-    console.log(localStorage.getItem('auth'));
-
     function logOut() {
         localStorage.removeItem('auth');
         navigate('/')
