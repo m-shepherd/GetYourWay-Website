@@ -29,7 +29,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         } else {
             Users user = possibleUser.get();
             List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(user.getRole()));
-            System.out.println(new User(user.getUsername(), passwordEncoder.encode(user.getPassword()), authorities));
             return new User(user.getUsername(), passwordEncoder.encode(user.getPassword()), authorities);
         }
     }

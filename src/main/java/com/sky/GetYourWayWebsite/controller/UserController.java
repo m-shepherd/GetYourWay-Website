@@ -81,7 +81,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/users/{username}/{password}")
+    @GetMapping("/users/{username}/{password}")
     public HttpStatus login(@PathVariable String username, @PathVariable String password) {
         Optional<Users> possibleUser = userService.findByUsername(username);
         Users user = null;

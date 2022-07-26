@@ -26,7 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().authorizeRequests()
                 .antMatchers("/**")
-                .authenticated().and().httpBasic();
+                .permitAll()
+                .and()
+                .httpBasic();
 //        .and()
 //                .formLogin()
 //                .successHandler(successHandler)

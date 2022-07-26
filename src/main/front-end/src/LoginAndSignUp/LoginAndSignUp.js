@@ -19,7 +19,7 @@ const LoginAndSignUp = () => {
         console.log(jsonData);
 
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:8080/users/" + jsonData.username + "/" + jsonData.password, true);
+        xhr.open("GET", "http://localhost:8080/users/" + jsonData.username + "/" + jsonData.password, true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4)  {
@@ -27,6 +27,7 @@ const LoginAndSignUp = () => {
                 const loginError = document.querySelector("#loginError");
                 if (serverResponse === '"OK"') {
                     loginError.style.display = 'none';
+                    localStorage.setItem('auth', btoa( jsonData.username + ":" + jsonData.password));
                     navigate('/MainPage');
                  } else {
                     loginError.style.display = "block";

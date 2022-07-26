@@ -1,6 +1,7 @@
 import './App.css';
-import React from 'react';
+import React from "react";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+
 
 import LoginAndSignUp from '../LoginAndSignUp/LoginAndSignUp';
 import ResetPassword from "../ResetPassword/ResetPassword";

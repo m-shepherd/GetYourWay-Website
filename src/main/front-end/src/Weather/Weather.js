@@ -22,7 +22,7 @@ const Weather = () => {
 
         axios.get(serverAddress + '/currentWeather?lat=' + testLatitude + '&lon=' + testLongitude, {
             headers: {
-                'Authorization': `Basic RGFuQzpwYXNzd29yZA==`
+                'Authorization': `Basic ${localStorage.getItem('auth')}`
             }
         }).then(response => {
             setCurrentWeather(parseResponseData(response.data.current));
@@ -36,7 +36,7 @@ const Weather = () => {
         const requestWeatherSymbol = () => {
             axios.get(serverAddress + '/getWeatherSymbolURL?description=' + currentWeather.description, {
                 headers: {
-                    'Authorization': `Basic RGFuQzpwYXNzd29yZA==`
+                    'Authorization': `Basic ${localStorage.getItem('auth')}`
                 }
             }).then(response => {
                 setWeatherSymbolURL(response.data);
