@@ -58,6 +58,10 @@ const ResetPassword = () =>  {
 
                     await delay(3);
                     navigate('/');
+                } else {
+                    const error = document.querySelector("#emailError");
+                    error.style.display = "block";
+                    error.innerHTML = "Unable To Send Email";
                 }
             }
         };
@@ -74,6 +78,10 @@ const ResetPassword = () =>  {
                 const serverResponse = xhr.responseText;
                 if (serverResponse === '"OK"') {
                     sendEmail(email)
+                } else {
+                    const error = document.querySelector("#emailError");
+                    error.style.display = "block";
+                    error.innerHTML = "Email Address Not Found";
                 }
             }
         };
