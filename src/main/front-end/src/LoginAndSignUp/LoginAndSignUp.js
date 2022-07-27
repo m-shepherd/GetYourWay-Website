@@ -1,12 +1,20 @@
 import {useNavigate} from "react-router-dom";
 import styles from './LoginInAndSignUp.module.css';
 import './LoginAndSignUp.css';
-import {switchToSignUp, switchToLogin, usernameChange, firstNameChange, lastNameChange,
-    emailChange, passwordChange} from './LoginAndSignUpUtils';
+import {
+    emailChange,
+    firstNameChange,
+    lastNameChange,
+    passwordChange,
+    switchToLogin,
+    switchToSignUp,
+    usernameChange
+} from './LoginAndSignUpUtils';
 
 const LoginAndSignUp = () => {
 
     let navigate = useNavigate();
+    let md5 = require('md5');
 
     function loginSubmit(event) {
         event.preventDefault();
@@ -17,6 +25,7 @@ const LoginAndSignUp = () => {
         data.forEach((value, key) => object[key] = value);
         object.firstName = "Placeholder"; object.lastName = "Placeholder"; object.email = "Placeholder";
         object.role = "Placeholder";
+        object.password = md5(object.password);
         const json = JSON.stringify(object);
 
         const xhr = new XMLHttpRequest();
@@ -47,13 +56,14 @@ const LoginAndSignUp = () => {
         const object = {};
         data.forEach((value, key) => object[key] = value);
         object.role = 'USER';
+        object.password = md5(object.password);
         const json = JSON.stringify(object);
 
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "http://localhost:8080/signUp", true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4)  {
+            if (xhr.readyState === 4) {
                 const serverResponse = xhr.responseText;
                 const signUpError = document.querySelector("#signUpError");
                 if (serverResponse === '"CREATED"') {
