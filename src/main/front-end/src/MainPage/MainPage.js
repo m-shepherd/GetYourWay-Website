@@ -13,23 +13,37 @@ const MainPage = () => {
         navigate('/')
     }
 
-    return (
-        <div>
-            <div className={mainStyles.padding}>
-                <div className={mainStyles.wrapper}>
-                    <div className={mainStyles.title_text}>
-                        <div className={mainStyles.title}>Main Page</div>
+    let data;
+    if (localStorage.getItem('auth') == null) {
+        data =
+            <>
+                <div className={mainStyles.error_wrapper}>
+                    <div className={mainStyles.error}>User Not Logged In</div>
+                    <div className={mainStyles.padding}>
+                        <div className={mainStyles.pass_link} onClick={logOut}><a href="">Go To Login</a></div>
                     </div>
-                    <div className={mainStyles.pass_link} onClick={logOut}><a href="">Log Out</a></div>
-                    <div className={mainStyles.pass_link}><a href="#findFlights">Find Flights</a></div>
                 </div>
-            </div>
+            </>;
+    } else {
+        data =
+            <>
+                <div className={mainStyles.padding}>
+                    <div className={mainStyles.wrapper}>
+                        <div className={mainStyles.title_text}>
+                            <div className={mainStyles.title}>Main Page</div>
+                        </div>
+                        <div className={mainStyles.pass_link} onClick={logOut}><a href="">Log Out</a></div>
+                        <div className={mainStyles.pass_link}><a href="#findFlights">Find Flights</a></div>
+                    </div>
+                </div>
 
-            <Weather/>
-            <Flights/>
-            
-        </div>
-    )
+                <Weather/>
+                <Flights/>
+
+            </>;
+    }
+    return data;
+
 }
 
 export default MainPage;

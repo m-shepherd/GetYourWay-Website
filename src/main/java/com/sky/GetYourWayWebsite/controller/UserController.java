@@ -40,20 +40,10 @@ public class UserController {
         return possibleUser.isPresent();
     }
 
-    @GetMapping("/users/getUserByEmail")
+    @GetMapping("/email/getUserByEmail")
     public HttpStatus checkUserPresentByEmail(@RequestParam String email){
-        System.out.println(email);
         if (userService.findByEmail(email).isPresent()){
             return HttpStatus.OK;
-        } else {
-            return HttpStatus.BAD_REQUEST;
-        }
-    }
-    
-    @PostMapping("/users")
-    public HttpStatus createUser(@RequestBody Users newUser) {
-        if (!isUserPresent(newUser.getUsername())) {
-            return editUserDetails(newUser);
         } else {
             return HttpStatus.BAD_REQUEST;
         }
@@ -62,6 +52,15 @@ public class UserController {
     @PutMapping("/users")
     public HttpStatus updateUser(@RequestBody Users newUser) {
         if (isUserPresent(newUser.getUsername())) {
+            return editUserDetails(newUser);
+        } else {
+            return HttpStatus.BAD_REQUEST;
+        }
+    }
+
+    @PostMapping("/login")
+    public HttpStatus createUser(@RequestBody Users newUser) {
+        if (!isUserPresent(newUser.getUsername())) {
             return editUserDetails(newUser);
         } else {
             return HttpStatus.BAD_REQUEST;
@@ -82,7 +81,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/users/{username}/{password}")
+    @GetMapping("/login/{username}/{password}")
     public HttpStatus login(@PathVariable String username, @PathVariable String password) {
         Optional<Users> possibleUser = userService.findByUsername(username);
         Users user = null;
@@ -100,6 +99,5 @@ public class UserController {
         }
 
     }
-
 
 }

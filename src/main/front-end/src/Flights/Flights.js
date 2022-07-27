@@ -4,7 +4,7 @@ import {getFlights, confirmFlights} from "./FlightsUtils";
 
 const Flights = () => {
     return (
-        <div>
+        <>
             <div className={flightStyles.padding}>
                 <div className={flightStyles.wrapper}>
                     <div className={flightStyles.form_container}>
@@ -33,14 +33,12 @@ const Flights = () => {
                         <div id="flightData" className={flightStyles.tableFixHead} style={{display: "none"}}>
                             <table id="table">
                                 <thead>
-                                {/*<tr id="header">*/}
                                 <th>Departure Airport</th>
                                 <th>Departure Time</th>
                                 <th>Arrival Airport</th>
                                 <th>Arrival Time</th>
                                 <th>Airline</th>
                                 <th>Flight Number</th>
-                                {/*</tr>*/}
                                 </thead>
                                 <tbody id="flightTable"></tbody>
                             </table>
@@ -52,8 +50,8 @@ const Flights = () => {
                     </div>
                 </div>
             </div>
-        </div>
-    )
-};
+        </>
+    );
+}
 
 export default Flights;

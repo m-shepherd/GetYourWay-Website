@@ -1,93 +1,81 @@
+import {useNavigate} from "react-router-dom";
 import styles from './ResetPassword.module.css';
 import './ResetPassword.css'
-import {useNavigate} from "react-router-dom";
+import {emailChange} from "./ResetPasswordUtils";
 
 
 const ResetPassword = () =>  {
 
     let navigate = useNavigate();
 
-    function emailChange() {
-        const email = document.querySelector("#email");
-
-        const validEmail = email.checkValidity();
-        const error = document.querySelector("#emailError")
-
-        if (email.value.length === 0) {
-            error.style.display = "none";
-            document.getElementById("email").classList.remove("incorrect");
-        } else {
-            if (!validEmail) {
-                error.style.display = "block";
-                error.innerHTML = "Email Must Follow The Format name@address.xyz"
-                document.getElementById("email").classList.add("incorrect");
-            } else {
-                error.style.display = "none";
-                document.getElementById("email").classList.remove("incorrect");
-            }
-        }
-
+    function delay(n){
+        return new Promise(function(resolve){
+            setTimeout(resolve,n*1000);
+        });
     }
 
     function sendEmail(email){
-            const emailSettings = {
-                "recipient": email,
-                "msgBody": "http://localhost:8080/users",
-                "subject": "Test email"
-            }
+        const emailSettings = {
+            "recipient": email,
+            "msgBody": "http://localhost:8080/users",
+            "subject": "Test email"
+        }
 
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://localhost:8080/sendMail");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(JSON.stringify(emailSettings));
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:8080/email/sendMail", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(emailSettings));
+        xhr.onreadystatechange = async function() {
+            if (xhr.readyState === 4)  {
+                const serverResponse = xhr.responseText;
+                if (serverResponse === 'Mail Sent Successfully...') {
+                    const success = document.querySelector("#emailError");
+                    success.style.display = "block";
+                    success.classList.remove("error");
+                    success.classList.add("success");
+                    success.innerHTML = "Email Successfully Sent<br></br>Redirecting...";
+
+                    await delay(3);
+                    navigate('/');
+                } else {
+                    const error = document.querySelector("#emailError");
+                    error.style.display = "block";
+                    error.innerHTML = "Unable To Send Email";
+                }
+            }
+        };
 
     }
 
     function checkEmailIsValid(email){
-        // const userObject = {
-        //     "username" : "placeholder",
-        //     "firstName" : "placeholder",
-        //     "lastName" : "placeholder",
-        //     "email" : email,
-        //     "password" : "placeholder"
-        // }
-        // console.log(userObject);
-        // const userJSON = JSON.stringify(userObject);
-        //const userData = JSON.parse(userJSON);
         const xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://localhost:8080/users/getUserByEmail?email=" + email, true);
+        xhr.open("GET", "http://localhost:8080/email/getUserByEmail?email=" + email, true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send();
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4)  {
                 const serverResponse = xhr.responseText;
-                console.log(serverResponse);
                 if (serverResponse === '"OK"') {
                     sendEmail(email)
+                } else {
+                    const error = document.querySelector("#emailError");
+                    error.style.display = "block";
+                    error.innerHTML = "Email Address Not Found";
                 }
             }
         };
     }
 
-
     function submitEmail(event) {
         event.preventDefault();
-
-        // const data = new FormData(event.target);
-
-        // const object = {};
-        // data.forEach((value, key) => object[key] = value);
-        // const json = JSON.stringify(object);
-        // const jsonData = JSON.parse(json);
 
         const email = document.querySelector('#email').value;
 
         checkEmailIsValid(email);
     }
 
-
     return (
-        <div>
+        <>
             <div className={styles.wrapper}>
                 <div className={styles.title_text}>
                     <div className={styles.title}>Reset Your Password</div>
@@ -100,7 +88,7 @@ const ResetPassword = () =>  {
                                        pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
                                        placeholder="Email Address" maxLength={64} onChange={emailChange}/>
                             </div>
-                            <div id="emailError" className={styles.error} style={{display: 'none', textAlign: 'center'}}></div>
+                            <div id="emailError" className="error" style={{display: 'none', textAlign: 'center'}}></div>
                             <div className={`${styles.field} ${styles.btn}`}>
                                 <div className={styles.btn_layer}></div>
                                 <input type="submit" value="Send Recovery Email"/>
@@ -110,7 +98,7 @@ const ResetPassword = () =>  {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
