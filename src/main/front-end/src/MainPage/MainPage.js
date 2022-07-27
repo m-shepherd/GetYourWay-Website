@@ -1,4 +1,3 @@
-import {render} from "react-dom";
 import {useNavigate} from "react-router-dom";
 import mainStyles from'./MainPage.module.css';
 import './MainPage.css';
