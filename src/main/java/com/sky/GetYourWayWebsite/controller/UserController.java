@@ -58,7 +58,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/login")
+    @PostMapping("/signUp")
     public HttpStatus createUser(@RequestBody Users newUser) {
         if (!isUserPresent(newUser.getUsername())) {
             return editUserDetails(newUser);
@@ -81,15 +81,15 @@ public class UserController {
         }
     }
 
-    @GetMapping("/login/{username}/{password}")
-    public HttpStatus login(@PathVariable String username, @PathVariable String password) {
-        Optional<Users> possibleUser = userService.findByUsername(username);
+    @PostMapping("/login")
+    public HttpStatus login(@RequestBody Users login) {
+        Optional<Users> possibleUser = userService.findByUsername(login.getUsername());
         Users user = null;
         if (possibleUser.isPresent()) {
             user = possibleUser.get();
         }
         if (user != null) {
-            if (user.getPassword().equals(password)) {
+            if (user.getPassword().equals(login.getPassword())) {
                 return HttpStatus.OK;
             } else {
                 return HttpStatus.UNAUTHORIZED;
