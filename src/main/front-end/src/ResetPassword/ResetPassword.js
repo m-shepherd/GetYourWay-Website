@@ -11,7 +11,7 @@ const ResetPassword = () =>  {
         const email = document.querySelector("#email");
 
         const validEmail = email.checkValidity();
-        const error = document.querySelector("#emailError")
+        const error = document.querySelector("#emailError");
 
         if (email.value.length === 0) {
             error.style.display = "none";
@@ -29,17 +29,38 @@ const ResetPassword = () =>  {
 
     }
 
-    function sendEmail(email){
-            const emailSettings = {
-                "recipient": email,
-                "msgBody": "http://localhost:8080/users",
-                "subject": "Test email"
-            }
+    function delay(n){
+        return new Promise(function(resolve){
+            setTimeout(resolve,n*1000);
+        });
+    }
 
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://localhost:8080/email/sendMail");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(JSON.stringify(emailSettings));
+    function sendEmail(email){
+        const emailSettings = {
+            "recipient": email,
+            "msgBody": "http://localhost:8080/users",
+            "subject": "Test email"
+        }
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:8080/email/sendMail", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(emailSettings));
+        xhr.onreadystatechange = async function() {
+            if (xhr.readyState === 4)  {
+                const serverResponse = xhr.responseText;
+                if (serverResponse === 'Mail Sent Successfully...') {
+                    const success = document.querySelector("#emailError");
+                    success.style.display = "block";
+                    success.classList.remove("error");
+                    success.classList.add("success");
+                    success.innerHTML = "Email Successfully Sent<br></br>Redirecting...";
+
+                    await delay(3);
+                    navigate('/');
+                }
+            }
+        };
 
     }
 
@@ -82,7 +103,7 @@ const ResetPassword = () =>  {
                                        pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
                                        placeholder="Email Address" maxLength={64} onChange={emailChange}/>
                             </div>
-                            <div id="emailError" className={styles.error} style={{display: 'none', textAlign: 'center'}}></div>
+                            <div id="emailError" className="error" style={{display: 'none', textAlign: 'center'}}></div>
                             <div className={`${styles.field} ${styles.btn}`}>
                                 <div className={styles.btn_layer}></div>
                                 <input type="submit" value="Send Recovery Email"/>
