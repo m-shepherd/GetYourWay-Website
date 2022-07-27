@@ -33,14 +33,12 @@ const Flights = () => {
                         <div id="flightData" className={flightStyles.tableFixHead} style={{display: "none"}}>
                             <table id="table">
                                 <thead>
-                                {/*<tr id="header">*/}
                                 <th>Departure Airport</th>
                                 <th>Departure Time</th>
                                 <th>Arrival Airport</th>
                                 <th>Arrival Time</th>
                                 <th>Airline</th>
                                 <th>Flight Number</th>
-                                {/*</tr>*/}
                                 </thead>
                                 <tbody id="flightTable"></tbody>
                             </table>
@@ -53,7 +51,7 @@ const Flights = () => {
                 </div>
             </div>
         </div>
-    )
-};
+    );
+}
 
 export default Flights;
