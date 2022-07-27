@@ -4,7 +4,7 @@ import {getFlights, confirmFlights} from "./FlightsUtils";
 
 const Flights = () => {
     return (
-        <div>
+        <>
             <div className={flightStyles.padding}>
                 <div className={flightStyles.wrapper}>
                     <div className={flightStyles.form_container}>
@@ -50,7 +50,7 @@ const Flights = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

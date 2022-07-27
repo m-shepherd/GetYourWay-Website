@@ -64,7 +64,7 @@ const LoginAndSignUp = () => {
     }
 
     return (
-        <div>
+        <>
             <div className={styles.wrapper}>
                 <div className={styles.title_text}>
                     <div id="loginText" className={styles.title}>Login Form</div>
@@ -135,7 +135,7 @@ const LoginAndSignUp = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

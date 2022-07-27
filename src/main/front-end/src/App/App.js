@@ -10,13 +10,13 @@ import MainPage from "../MainPage/MainPage";
 const App = () => {
     return (
         <Router>
-            <div>
+            <>
             <Routes>
                 <Route path = "/" element={<LoginAndSignUp/>}/>
                 <Route path="/ResetPassword" element={<ResetPassword/>}/>
                 <Route path="/MainPage" element={<MainPage/>}/>
             </Routes>
-          </div>
+          </>
         </Router>
     );
 }

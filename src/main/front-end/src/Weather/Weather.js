@@ -54,7 +54,7 @@ const Weather = () => {
 
 
     return (
-        <div>
+        <>
             <div className={weatherStyle.padding}>
                 <div className={weatherStyle.wrapper}>
                     <div className={weatherStyle.weatherContainer}>
@@ -69,7 +69,7 @@ const Weather = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 };
 

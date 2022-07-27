@@ -16,17 +16,17 @@ const MainPage = () => {
     let data;
     if (localStorage.getItem('auth') == null) {
         data =
-            <div>
+            <>
                 <div className={mainStyles.error_wrapper}>
                     <div className={mainStyles.error}>User Not Logged In</div>
                     <div className={mainStyles.padding}>
                         <div className={mainStyles.pass_link} onClick={logOut}><a href="">Go To Login</a></div>
                     </div>
                 </div>
-            </div>;
+            </>;
     } else {
         data =
-            <div>
+            <>
                 <div className={mainStyles.padding}>
                     <div className={mainStyles.wrapper}>
                         <div className={mainStyles.title_text}>
@@ -40,7 +40,7 @@ const MainPage = () => {
                 <Weather/>
                 <Flights/>
 
-            </div>;
+            </>;
     }
     return data;
 

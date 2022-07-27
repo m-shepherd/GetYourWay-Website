@@ -75,7 +75,7 @@ const ResetPassword = () =>  {
     }
 
     return (
-        <div>
+        <>
             <div className={styles.wrapper}>
                 <div className={styles.title_text}>
                     <div className={styles.title}>Reset Your Password</div>
@@ -98,7 +98,7 @@ const ResetPassword = () =>  {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
