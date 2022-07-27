@@ -54,9 +54,13 @@ const LoginAndSignUp = () => {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4)  {
                 const serverResponse = xhr.responseText;
+                const signUpError = document.querySelector("#signUpError");
                 if (serverResponse === '"CREATED"') {
                     localStorage.setItem('auth', btoa( object.username + ":" + object.password))
                     navigate('/MainPage')
+                } else {
+                    signUpError.style.display = "block";
+                    signUpError.innerHTML = "Invalid Details";
                 }
             }
         };
@@ -98,6 +102,7 @@ const LoginAndSignUp = () => {
                             <div className={styles.signup_link}>Not A Member? <a href="#" onClick={switchToSignUp}>Sign Up Now</a></div>
                         </form>
                         <form className={styles.signup} onSubmit={signUpSubmit} method="post" action="localhost:8080/users">
+                            <div id="signUpError" className={styles.error} style={{display: "none"}}></div>
                             <div className={styles.field}>
                                 <input type="text" id="username" name="username" required
                                        pattern="^[A-Za-z][A-Za-z0-9_-]{7,31}$" placeholder="Username"
