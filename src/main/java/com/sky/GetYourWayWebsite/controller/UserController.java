@@ -58,7 +58,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/login")
+    @PostMapping("/signUp")
     public HttpStatus createUser(@RequestBody Users newUser) {
         if (!isUserPresent(newUser.getUsername())) {
             return editUserDetails(newUser);
