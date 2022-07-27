@@ -15,11 +15,12 @@ const LoginAndSignUp = () => {
 
         const object = {};
         data.forEach((value, key) => object[key] = value);
+        object.firstName = "Placeholder"; object.lastName = "Placeholder"; object.email = "Placeholder";
+        object.role = "Placeholder";
         const json = JSON.stringify(object);
-        const jsonData = JSON.parse(json);
 
         const xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://localhost:8080/login/" + jsonData.username + "/" + jsonData.password, true);
+        xhr.open("POST", "http://localhost:8080/login", true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4)  {
@@ -27,7 +28,7 @@ const LoginAndSignUp = () => {
                 const loginError = document.querySelector("#loginError");
                 if (serverResponse === '"OK"') {
                     loginError.style.display = 'none';
-                    localStorage.setItem('auth', btoa( jsonData.username + ":" + jsonData.password));
+                    localStorage.setItem('auth', btoa( object.username + ":" + object.password));
                     navigate('/MainPage');
                 } else {
                     loginError.style.display = "block";
@@ -35,7 +36,7 @@ const LoginAndSignUp = () => {
                 }
             }
         };
-        xhr.send();
+        xhr.send(json);
     }
 
     function signUpSubmit(event) {
