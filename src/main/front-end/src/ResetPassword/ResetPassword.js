@@ -37,31 +37,20 @@ const ResetPassword = () =>  {
             }
 
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://localhost:8080/sendMail");
+            xhr.open("POST", "http://localhost:8080/email/sendMail");
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send(JSON.stringify(emailSettings));
 
     }
 
     function checkEmailIsValid(email){
-        // const userObject = {
-        //     "username" : "placeholder",
-        //     "firstName" : "placeholder",
-        //     "lastName" : "placeholder",
-        //     "email" : email,
-        //     "password" : "placeholder"
-        // }
-        // console.log(userObject);
-        // const userJSON = JSON.stringify(userObject);
-        //const userData = JSON.parse(userJSON);
         const xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://localhost:8080/users/getUserByEmail?email=" + email, true);
+        xhr.open("GET", "http://localhost:8080/email/getUserByEmail?email=" + email, true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send();
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4)  {
                 const serverResponse = xhr.responseText;
-                console.log(serverResponse);
                 if (serverResponse === '"OK"') {
                     sendEmail(email)
                 }
@@ -72,13 +61,6 @@ const ResetPassword = () =>  {
 
     function submitEmail(event) {
         event.preventDefault();
-
-        // const data = new FormData(event.target);
-
-        // const object = {};
-        // data.forEach((value, key) => object[key] = value);
-        // const json = JSON.stringify(object);
-        // const jsonData = JSON.parse(json);
 
         const email = document.querySelector('#email').value;
 
