@@ -20,7 +20,9 @@ const MainPage = () => {
             <div>
                 <div className={mainStyles.error_wrapper}>
                     <div className={mainStyles.error}>User Not Logged In</div>
-                    <div className={mainStyles.pass_link} onClick={logOut}><a href="">Go To Login</a></div>
+                    <div className={mainStyles.padding}>
+                        <div className={mainStyles.pass_link} onClick={logOut}><a href="">Go To Login</a></div>
+                    </div>
                 </div>
             </div>;
     } else {

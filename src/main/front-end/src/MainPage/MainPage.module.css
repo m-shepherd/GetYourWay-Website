@@ -71,11 +71,11 @@ html,body{
     -webkit-border-radius: 7px;
     color: #cc0033;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 24px;
     position: relative;
     padding: 1em;
     margin: auto;
-    width:85%;
+    width:fit-content;
     height:fit-content;
     text-align: center;
 }
