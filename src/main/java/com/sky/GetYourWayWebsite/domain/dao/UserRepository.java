@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<Users, Integer> {
 
     Optional<Users> findUserByUsername(String username);
-    @CrossOrigin
+
     Optional<Users> findUserByEmail(String email);
 
 }

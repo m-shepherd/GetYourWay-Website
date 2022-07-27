@@ -17,14 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 // Annotation
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-// Class
 public class EmailController {
     @Autowired private EmailService emailService;
 
     // Sending a simple Email
     @PostMapping("/sendMail")
     public String sendMail(@RequestBody EmailDetails details) {
-        System.out.println(emailService.sendSimpleMail(details));
         return emailService.sendSimpleMail(details);
     }
 
