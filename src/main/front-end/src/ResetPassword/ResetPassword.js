@@ -1,33 +1,12 @@
+import {useNavigate} from "react-router-dom";
 import styles from './ResetPassword.module.css';
 import './ResetPassword.css'
-import {useNavigate} from "react-router-dom";
+import {emailChange} from "./ResetPasswordUtils";
 
 
 const ResetPassword = () =>  {
 
     let navigate = useNavigate();
-
-    function emailChange() {
-        const email = document.querySelector("#email");
-
-        const validEmail = email.checkValidity();
-        const error = document.querySelector("#emailError");
-
-        if (email.value.length === 0) {
-            error.style.display = "none";
-            document.getElementById("email").classList.remove("incorrect");
-        } else {
-            if (!validEmail) {
-                error.style.display = "block";
-                error.innerHTML = "Email Must Follow The Format name@address.xyz"
-                document.getElementById("email").classList.add("incorrect");
-            } else {
-                error.style.display = "none";
-                document.getElementById("email").classList.remove("incorrect");
-            }
-        }
-
-    }
 
     function delay(n){
         return new Promise(function(resolve){
@@ -87,7 +66,6 @@ const ResetPassword = () =>  {
         };
     }
 
-
     function submitEmail(event) {
         event.preventDefault();
 
@@ -95,7 +73,6 @@ const ResetPassword = () =>  {
 
         checkEmailIsValid(email);
     }
-
 
     return (
         <div>
