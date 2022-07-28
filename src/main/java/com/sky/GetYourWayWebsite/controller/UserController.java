@@ -58,6 +58,18 @@ public class UserController {
         }
     }
 
+    @PutMapping("/users/updatePassword")
+    public HttpStatus changePassword(@RequestParam String email, @RequestParam String password) {
+        Optional<Users> optionalUser = userService.findByEmail(email);
+        if (optionalUser.isPresent()){
+            Users user = optionalUser.get();
+            user.setPassword(password);
+            return editUserDetails(user);
+        } else {
+            return HttpStatus.BAD_REQUEST;
+        }
+    }
+
     @PostMapping("/signUp")
     public HttpStatus createUser(@RequestBody Users newUser) {
         if (!isUserPresent(newUser.getUsername())) {
