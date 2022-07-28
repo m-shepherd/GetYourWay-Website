@@ -10,6 +10,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.crypto.DefaultJwtSignatureValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -23,7 +24,10 @@ import static io.jsonwebtoken.SignatureAlgorithm.HS256;
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
     @Autowired
-    UserDetailsServiceImpl userService;
+    private UserDetailsServiceImpl userService;
+
+    @Value("${secret.key}")
+    private String secretKey;
 
     @GetMapping("/users")
     public List<Users> getUsers() {
@@ -98,7 +102,6 @@ public class UserController {
         String login = new String(decoder.decode(chunks[1]));
 
         SignatureAlgorithm signatureAlgorithm = HS256;
-        String secretKey = "secret";
         SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getBytes(), signatureAlgorithm.getJcaName());
 
         String tokenWithoutSignature = chunks[0] + "." + chunks[1];
