@@ -12,7 +12,6 @@ import javax.persistence.Id;
 @Setter
 @ToString
 public class Users {
-
     @Id
     private String username;
     private String firstName;
