@@ -58,8 +58,10 @@ public class UserController {
         }
     }
 
-    @PutMapping("/users/updatePassword")
-    public HttpStatus changePassword(@RequestParam String email, @RequestParam String password) {
+    @PutMapping("/users/updatePassword/{email}/{password}")
+    public HttpStatus changePassword(@PathVariable String email, @PathVariable String password) {
+        System.out.println(email);
+        System.out.println(password);
         Optional<Users> optionalUser = userService.findByEmail(email);
         if (optionalUser.isPresent()){
             Users user = optionalUser.get();
