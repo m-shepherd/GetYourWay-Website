@@ -69,19 +69,74 @@ public class UserController {
         }
     }
 
-//    @PutMapping("/reset")
-//    public HttpStatus changePassword(@RequestBody) {
-//        System.out.println(email);
-//        System.out.println(password);
-//        Optional<Users> optionalUser = userService.findByEmail(email);
-//        if (optionalUser.isPresent()){
-//            Users user = optionalUser.get();
-//            user.setPassword(password);
-//            return editUserDetails(user);
-//        } else {
-//            return HttpStatus.BAD_REQUEST;
-//        }
-//    }
+    @PutMapping("/reset")
+    public HttpStatus changePassword(@RequestBody String token) {
+        token = token.substring(1, token.length() - 1);
+        String[] chunks = token.split("\\.");
+
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        String reset = new String(decoder.decode(chunks[1]));
+
+        SignatureAlgorithm signatureAlgorithm = HS256;
+        SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getBytes(), signatureAlgorithm.getJcaName());
+
+        String tokenWithoutSignature = chunks[0] + "." + chunks[1];
+        String signature = chunks[2];
+
+        DefaultJwtSignatureValidator validator = new DefaultJwtSignatureValidator(signatureAlgorithm, secretKeySpec);
+
+        ObjectNode json;
+        if (!validator.isValid(tokenWithoutSignature, signature)) {
+            return HttpStatus.BAD_REQUEST;
+        } else {
+            json = parseReset(reset);
+        }
+
+        return resetPassword(json);
+    }
+
+    private HttpStatus resetPassword(ObjectNode json) {
+        String email;
+        String password;
+        try {
+            email = json.get("email").toString().substring(1, json.get("email").toString().length() - 1);
+            password = json.get("password").toString().substring(1, json.get("password").toString().length() - 1);
+        } catch (Exception e) {
+            return HttpStatus.BAD_REQUEST;
+        }
+
+        Optional<Users> optionalUser = userService.findByEmail(email);
+        if (optionalUser.isPresent()) {
+            Users user = optionalUser.get();
+            user.setPassword(password);
+            return editUserDetails(user);
+        } else {
+            return HttpStatus.BAD_REQUEST;
+        }
+    }
+
+    private ObjectNode parseReset(String reset) {
+        reset = reset.replaceAll("\\\\", "");
+        reset = reset.replaceAll("\\{", "");
+        reset = reset.replaceAll("}", "");
+
+        return getJsonNodes(reset);
+    }
+
+    private ObjectNode getJsonNodes(String reset) {
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode json = mapper.createObjectNode();
+
+        String[] fields = reset.split(",");
+        for (String field : fields) {
+            String[] jsonEntry = field.split(":");
+            String key = jsonEntry[0].substring(1, jsonEntry[0].length() - 1);
+            String value = jsonEntry[1].substring(1, jsonEntry[1].length() - 1);
+            json.put(key, value);
+        }
+
+        return json;
+    }
 
     @PostMapping("/signUp")
     public HttpStatus createUser(@RequestBody Users newUser) {
@@ -168,18 +223,7 @@ public class UserController {
         login = login.replaceAll("}", "");
         login = login.substring(1, login.length() - 1);
 
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode json = mapper.createObjectNode();
-
-        String[] fields = login.split(",");
-        for (String field : fields) {
-            String[] jsonEntry = field.split(":");
-            String key = jsonEntry[0].substring(1, jsonEntry[0].length() - 1);
-            String value = jsonEntry[1].substring(1, jsonEntry[1].length() - 1);
-            json.put(key, value);
-        }
-
-        return json;
+        return getJsonNodes(login);
     }
 
 }
