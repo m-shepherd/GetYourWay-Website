@@ -20,7 +20,7 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "http://3.10.61.220:3000"})
 public class FlightController {
     private final String API_ADDRESS = "https://app.goflightlabs.com/flights";
     private final String API_KEY = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMTA0NTdmZDU1YTM4NjA3OWE0YjA3ZjIzMjVhZTJiMjRlYzA1M2MzMGE3ODJkZTFjMjY3ZmEwZmExMzBjYjBkMzQ1MTViMjVhMDIzMmY0NDAiLCJpYXQiOjE2NTg0MTI0NTksIm5iZiI6MTY1ODQxMjQ1OSwiZXhwIjoxNjg5OTQ4NDU5LCJzdWIiOiI5MDA0Iiwic2NvcGVzIjpbXX0.efxsoJCpmQQDhxvdAj2Kc4LnZ1paHKoji4jm9x6ikMr2Ile1lsBkMjvj0XuMxMSqNh8GSQdOUwHIKG-X0Q5JJQ";
