@@ -25,7 +25,6 @@ import static io.jsonwebtoken.SignatureAlgorithm.HS256;
 public class UserController {
     @Autowired
     private UserDetailsServiceImpl userService;
-
     @Value("${secret.key}")
     private String secretKey;
 
