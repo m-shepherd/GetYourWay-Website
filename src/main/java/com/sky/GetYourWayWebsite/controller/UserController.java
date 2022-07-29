@@ -58,19 +58,19 @@ public class UserController {
         }
     }
 
-    @PutMapping("/users/updatePassword/{email}/{password}")
-    public HttpStatus changePassword(@PathVariable String email, @PathVariable String password) {
-        System.out.println(email);
-        System.out.println(password);
-        Optional<Users> optionalUser = userService.findByEmail(email);
-        if (optionalUser.isPresent()){
-            Users user = optionalUser.get();
-            user.setPassword(password);
-            return editUserDetails(user);
-        } else {
-            return HttpStatus.BAD_REQUEST;
-        }
-    }
+//    @PutMapping("/reset")
+//    public HttpStatus changePassword(@RequestBody) {
+//        System.out.println(email);
+//        System.out.println(password);
+//        Optional<Users> optionalUser = userService.findByEmail(email);
+//        if (optionalUser.isPresent()){
+//            Users user = optionalUser.get();
+//            user.setPassword(password);
+//            return editUserDetails(user);
+//        } else {
+//            return HttpStatus.BAD_REQUEST;
+//        }
+//    }
 
     @PostMapping("/signUp")
     public HttpStatus createUser(@RequestBody Users newUser) {

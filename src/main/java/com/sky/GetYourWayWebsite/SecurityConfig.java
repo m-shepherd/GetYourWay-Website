@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/email/**")
                 .permitAll()
-                .antMatchers("/users/updatePassword/**")
+                .antMatchers("/reset/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
