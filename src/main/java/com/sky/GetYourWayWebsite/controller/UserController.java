@@ -21,7 +21,7 @@ import java.util.*;
 import static io.jsonwebtoken.SignatureAlgorithm.HS256;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000" )
 public class UserController {
     @Autowired
     private UserDetailsServiceImpl userService;
