@@ -23,7 +23,8 @@ import java.util.List;
 @CrossOrigin(origins = {"http://localhost:3000", "http://3.10.61.220:3000"})
 public class FlightController {
     private final String API_ADDRESS = "https://app.goflightlabs.com/flights";
-    private final String API_KEY = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMTA0NTdmZDU1YTM4NjA3OWE0YjA3ZjIzMjVhZTJiMjRlYzA1M2MzMGE3ODJkZTFjMjY3ZmEwZmExMzBjYjBkMzQ1MTViMjVhMDIzMmY0NDAiLCJpYXQiOjE2NTg0MTI0NTksIm5iZiI6MTY1ODQxMjQ1OSwiZXhwIjoxNjg5OTQ4NDU5LCJzdWIiOiI5MDA0Iiwic2NvcGVzIjpbXX0.efxsoJCpmQQDhxvdAj2Kc4LnZ1paHKoji4jm9x6ikMr2Ile1lsBkMjvj0XuMxMSqNh8GSQdOUwHIKG-X0Q5JJQ";
+    private final String API_KEY = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMGQ1M2VkODYyYzBmNzliYmEyZTFmMmI3ZTBmYTY2ZmEwZjMzNmYyODY4ZmUxYmFiMjJiZmFlNTAyM2Y2ZDdiYmVlNzhmOTIyZjc4MTZkMDQiLCJpYXQiOjE2NTgxNTU4OTYsIm5iZiI6MTY1ODE1NTg5NiwiZXhwIjoxNjg5NjkxODk2LCJzdWIiOiI4NzI0Iiwic2NvcGVzIjpbXX0.mmyCyRS-ia216FPFhkzWmKTtgA_ES2Ot5ZocmwWKWKNnS6KumPp6qKZwA6B0zbdlKoEUTBerinhpT08xNl9iqQ";
+
     @GetMapping("/flights")
     public List<Flight> getFlights(@RequestParam String date, @RequestParam String dep, @RequestParam String arr) {
         try {
@@ -32,9 +33,9 @@ public class FlightController {
 
             RestTemplate restTemplate = new RestTemplate();
 
-//            return readFlightData(restTemplate.getForObject(uri, Object.class));
+            return readFlightData(restTemplate.getForObject(API_ADDRESS + "?access_key=" + API_KEY, Object.class));
 
-            return readFlightData(FlightUtils.read("src/main/resources/example-flight-data.txt"));
+//            return readFlightData(FlightUtils.read("src/main/resources/example-flight-data.txt"));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
@@ -42,15 +43,16 @@ public class FlightController {
 
     private List<Flight> readFlightData(Object allFlights) {
         try {
+            System.out.println(allFlights);
             ObjectMapper mapper = new ObjectMapper();
             JsonNode flightJson = mapper.valueToTree(allFlights);
 
             return getFlights((ArrayNode) flightJson);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(allFlights);
+            return null;
         }
-        return null;
     }
 
     private List<Flight> readFlightData(String allFlights) {
@@ -75,7 +77,7 @@ public class FlightController {
             flightList.add(flight);
 
         }
-
+        System.out.println(flightList);
         return flightList;
     }
 
