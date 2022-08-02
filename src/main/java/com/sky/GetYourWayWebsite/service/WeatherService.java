@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class WeatherService {
     private final String WEATHER_API_ADDRESS = "https://api.openweathermap.org/data/2.5/onecall?";
-    private final String WEATHER_API_KEY = "b4057c94ecd30c1ccb944addfb79d2bc";
+    private final String WEATHER_API_KEY = "ecff5d92d039ed67b9855de99126c64b";
 
     private String getAPIEndpoint(double latitude, double longitude, String exclude) {
         return WEATHER_API_ADDRESS + "lat=" + latitude + "&lon=" + longitude + "&exclude=" + exclude +

@@ -53,7 +53,7 @@ public class FlightController {
     }
 
     @GetMapping("/flights")
-    public List<Flight> getFlights(@RequestParam String date, @RequestParam String dep, @RequestParam String arr) {
+    public List<Flight> getFlights(@RequestParam String date, @RequestParam String dep, @RequestParam String arr, @RequestParam String direct) {
         String authorisationToken = getAuthorisationToken();
         if (authorisationToken == null) {
             return null;
@@ -63,7 +63,9 @@ public class FlightController {
                         "originLocationCode=" + dep +
                         "&destinationLocationCode=" + arr +
                         "&departureDate=" + date +
-                        "&adults=1&nonStop=false&max=10");
+                        "&adults=1&" +
+                        "nonStop=" + direct +
+                        "&max=10");
                 HttpURLConnection http = (HttpURLConnection)url.openConnection();
                 http.setRequestProperty("Authorization", authorisationToken);
 
