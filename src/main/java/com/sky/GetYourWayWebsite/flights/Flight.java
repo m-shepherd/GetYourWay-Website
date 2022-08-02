@@ -2,40 +2,21 @@ package com.sky.GetYourWayWebsite.flights;
 
 import lombok.Getter;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Getter
 public class Flight {
 //    private final LocalDate date;
-    private final String departureAirport;
-    private final LocalTime departureTime;
-    private final String arrivalAirport;
-    private final LocalTime arrivalTime;
-    private final String airlineName;
-    private final String flightNumber;
+    private final List<String> airports;
+    private final List<LocalTime> times;
+    private final double price;
 
-    public Flight(String departureAirport, LocalTime departureTime, String arrivalAirport, LocalTime arrivalTime,
-                  String airlineName, String airlineNumber) {
-//        this.date = date;
-        this.departureAirport = departureAirport;
-        this.departureTime = departureTime;
-        this.arrivalAirport = arrivalAirport;
-        this.arrivalTime = arrivalTime;
-        this.airlineName = airlineName;
-        this.flightNumber = airlineNumber;
+
+    public Flight(List<String> airports, List<LocalTime> times, double price) {
+        this.airports = airports;
+        this.times = times;
+        this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "Flight Details:\n" +
-//                "Date -> " + date.toString() + "\n" +
-                "Departure Airport -> " + departureAirport + "\n" +
-                "Departure Time -> " + departureTime.toString() + "\n" +
-                "Arrival Airport -> " + arrivalAirport + "\n" +
-                "Arrival Time -> " + arrivalTime.toString() + "\n" +
-                "Airline Name -> " + airlineName+ "\n" +
-                "Flight Number -> " + flightNumber;
-
-    }
 }
