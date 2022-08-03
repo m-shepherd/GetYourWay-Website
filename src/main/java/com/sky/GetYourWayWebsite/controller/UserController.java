@@ -56,7 +56,7 @@ public class UserController {
         if (userService.findByEmail(email).isPresent()){
             return HttpStatus.OK;
         } else {
-            return HttpStatus.BAD_REQUEST;
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -65,7 +65,7 @@ public class UserController {
         if (isUserPresent(newUser.getUsername())) {
             return editUserDetails(newUser);
         } else {
-            return HttpStatus.BAD_REQUEST;
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -143,7 +143,7 @@ public class UserController {
         if (!isUserPresent(newUser.getUsername())) {
             return editUserDetails(newUser);
         } else {
-            return HttpStatus.BAD_REQUEST;
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -155,7 +155,7 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid User Information Provided");
         }
         if (result == null) {
-            return HttpStatus.BAD_REQUEST;
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         } else {
             return HttpStatus.CREATED;
         }
