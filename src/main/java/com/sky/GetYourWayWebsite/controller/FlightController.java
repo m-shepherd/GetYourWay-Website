@@ -99,8 +99,9 @@ public class FlightController {
         List<String> flightsForTrip = getFlightsForTrip((ArrayNode) flightItinerary);
         List<LocalTime> timesForTrip = getTimesForTrip((ArrayNode) flightItinerary);
         double price = Double.parseDouble(arrayElement.at("/price/grandTotal").toString().substring(1, arrayElement.at("/price/grandTotal").toString().length() - 1));
+        List<String> durations = getDurationsForTrip((ArrayNode) flightItinerary);
 
-        return new Flight(flightsForTrip, timesForTrip, price);
+        return new Flight(flightsForTrip, timesForTrip, price, durations);
     }
 
     private List<String> getFlightsForTrip(ArrayNode flightItinerary) {
@@ -121,6 +122,23 @@ public class FlightController {
             }
         }
         return flightsForTrip;
+    }
+
+    private List<String> getDurationsForTrip(ArrayNode flightItinerary) {
+        List<String> durationsForTrip = new ArrayList<>();
+        System.out.println(flightItinerary.get(0).get("duration"));
+        String totalDuration = flightItinerary.get(0).get("duration").toString().substring(1, flightItinerary.get(0).get("duration").toString().length() - 1);
+        durationsForTrip.add(totalDuration);
+        for (int i = 0; i < flightItinerary.size(); i++) {
+            JsonNode arrayElement = flightItinerary.get(i);
+            JsonNode segments = arrayElement.get("segments");
+            for (int j = 0; j < segments.size(); j++) {
+                JsonNode segment = segments.get(j);
+                String duration = segment.at("/duration").toString().substring(1, segment.at("/duration").toString().length() - 1);
+                durationsForTrip.add(duration);
+            }
+        }
+        return durationsForTrip;
     }
 
     private List<LocalTime> getTimesForTrip(ArrayNode flightItinerary) {
