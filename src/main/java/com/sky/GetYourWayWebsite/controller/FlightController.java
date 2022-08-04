@@ -126,7 +126,6 @@ public class FlightController {
 
     private List<String> getDurationsForTrip(ArrayNode flightItinerary) {
         List<String> durationsForTrip = new ArrayList<>();
-        System.out.println(flightItinerary.get(0).get("duration"));
         String totalDuration = flightItinerary.get(0).get("duration").toString().substring(1, flightItinerary.get(0).get("duration").toString().length() - 1);
         durationsForTrip.add(totalDuration);
         for (int i = 0; i < flightItinerary.size(); i++) {
