@@ -26,8 +26,11 @@ import java.util.List;
 @CrossOrigin(origins = {"http://localhost:3000", "http://3.10.61.220:3000"})
 public class FlightController {
     private final String API_ADDRESS = "https://test.api.amadeus.com";
-    private final String CLIENT_ID = "EtXMCRf8Z4CeoOTAV2IQZE6sxxasLHex";
-    private final String CLIENT_SECRET = "mcLogSpqvZosETpS";
+    //private final String CLIENT_ID = "EtXMCRf8Z4CeoOTAV2IQZE6sxxasLHex";
+    private final String CLIENT_ID = "s9pRsnD7XlE2EITnfEYQmM7ih1BT3wco";
+
+    //private final String CLIENT_SECRET = "mcLogSpqvZosETpS";
+    private final String CLIENT_SECRET = "n8ko79eUBLa9f07r";
 
 
     @GetMapping("/flights/nearest")
